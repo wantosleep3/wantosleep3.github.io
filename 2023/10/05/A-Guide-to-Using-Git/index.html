@@ -10,7 +10,7 @@
   <meta name="description" content="werwerwerwerwer">
   
   <title>
-    My Second Blog |
+    Uploading Your Project Files to GitHub: A Guide to Using Git |
     
     werwerwer的个人博客
   </title>
@@ -34,7 +34,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-My-Second-Blog" class="article article-type-post" itemscope
+  <article id="post-A-Guide-to-Using-Git" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -43,7 +43,7 @@
       
   
   <h1 class="article-title" itemprop="name">
-    My Second Blog
+    Uploading Your Project Files to GitHub: A Guide to Using Git
   </h1>
   
   
@@ -53,8 +53,8 @@
 
     
     <div class="article-meta">
-      <a href="/2023/06/29/My-Second-Blog/" class="article-date">
-  <time datetime="2023-06-29T12:51:13.000Z" itemprop="datePublished">2023-06-29</time>
+      <a href="/2023/10/05/A-Guide-to-Using-Git/" class="article-date">
+  <time datetime="2023-10-05T06:13:11.000Z" itemprop="datePublished">2023-10-05</time>
 </a>
       
     </div>
@@ -62,18 +62,139 @@
 
     
     
+<div class="tocbot"></div>
+
     
 
     <div class="article-entry" itemprop="articleBody">
       
       
       
-        <p>this is my second blog</p>
+        <h1 id="how-to-use-Git"><a href="#how-to-use-Git" class="headerlink" title="how to use Git?"></a>how to use Git?</h1><h3 id="Git基本操作介绍"><a href="#Git基本操作介绍" class="headerlink" title="Git基本操作介绍"></a>Git基本操作介绍</h3><ul>
+<li>目录的切换</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">git bash输入</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pwd</td>
+<td align="center">显示当前终端会话的目录位置</td>
+</tr>
+<tr>
+<td align="center">ls</td>
+<td align="center">查看当前目录的所有文件</td>
+</tr>
+<tr>
+<td align="center">cd..</td>
+<td align="center">上一级</td>
+</tr>
+<tr>
+<td align="center">cd 下一级的目录名</td>
+<td align="center">进入下一级</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<ul>
+<li>git</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">git</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">git version</td>
+<td align="center">输出版本号</td>
+</tr>
+<tr>
+<td align="center">git config –global user.name “你的名字”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">git config –global user.email “你的邮箱”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">git init</td>
+<td align="center">初始化</td>
+</tr>
+<tr>
+<td align="center">git add <em>hello.txt</em></td>
+<td align="center">把文件加入git的版本控制系统中</td>
+</tr>
+<tr>
+<td align="center">git add .</td>
+<td align="center">把当前目录全部文件加入git的版本控制系统中,现在只是暂时保存</td>
+</tr>
+<tr>
+<td align="center">git commit</td>
+<td align="center">把上一步(add)的提交,此时进入了<em>vim终端编辑器</em></td>
+</tr>
+</tbody></table>
+<p>​	</p>
+<p>​		<em>vim编辑器使用</em></p>
+<img src="D:\MyPlace\Blog\source\_posts\vim.png" alt="vim" style="zoom: 50%;" />
+
+<ol>
+<li><strong>进入</strong>了vim ，默认是不能写东西的， 要按a或者i进入<strong>编辑模式</strong></li>
+<li>写本次提交的说明</li>
+<li><strong>退出</strong>   先按esc退出编辑模式 再输入英文冒号:    w q 保存 退出</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">git</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">git log</td>
+<td align="center">查看日志</td>
+</tr>
+<tr>
+<td align="center">git commit -m”第二次提交”</td>
+<td align="center">写说明的简单操作 <strong>跳过vim</strong>  ，提交后系统打印一串commit id</td>
+</tr>
+<tr>
+<td align="center">git reset –hard [粘贴commit id]</td>
+<td align="center">回退版本       <em>hard硬重置（覆盖所有变更、soft   、mixed</em></td>
+</tr>
+<tr>
+<td align="center">git branch 分支名</td>
+<td align="center">git commit的时候创建一个分支</td>
+</tr>
+<tr>
+<td align="center">git branch -a</td>
+<td align="center">查看所有分支</td>
+</tr>
+<tr>
+<td align="center">git checkout 分支名</td>
+<td align="center">切换分支</td>
+</tr>
+<tr>
+<td align="center">git merge</td>
+<td align="center">结合分支</td>
+</tr>
+</tbody></table>
+<ul>
+<li>把项目上传到github  官方教程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin 填你的github的仓库链接比如https:<span class="comment">//github.com/wantosleep3/JavaWebbrand-case.git</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/06/29/My-Second-Blog/" data-id="clncunqya0003boi2f04l0qnx" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/10/05/A-Guide-to-Using-Git/" data-id="clncunqxz0001boi2cv9c0j4g" class="article-share-link">
         Share
       </a>
       
@@ -85,19 +206,10 @@
   
 <nav class="article-nav">
   
+  
   <a href="/2023/06/30/mark_down_tutorial/" class="article-nav-link">
-    <strong class="article-nav-caption">Newer</strong>
-    <div class="article-nav-title">
-      
-      (no title)
-      
-    </div>
-  </a>
-  
-  
-  <a href="/2023/06/29/hello-world/" class="article-nav-link">
     <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">Hello World</div>
+    <div class="article-nav-title"></div>
   </a>
   
 </nav>
