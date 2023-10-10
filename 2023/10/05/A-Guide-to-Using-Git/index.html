@@ -155,7 +155,7 @@
 </thead>
 <tbody><tr>
 <td align="center">git log</td>
-<td align="center">查看日志          git log –oneline 打印每行描述</td>
+<td align="center">查看**日志  **        git log –oneline 打印每行描述</td>
 </tr>
 <tr>
 <td align="center">git commit -m <em>第二次提交</em></td>
@@ -163,23 +163,31 @@
 </tr>
 <tr>
 <td align="center">git reset –hard <em>粘贴commit id</em></td>
-<td align="center">回退版本       <em>hard硬重置（覆盖所有变更、soft   、mixed</em></td>
+<td align="center"><strong>回退</strong>版本       <em>hard硬重置（覆盖所有变更、soft   、mixed</em></td>
 </tr>
 <tr>
 <td align="center">git branch <em>分支名</em></td>
-<td align="center">git commit的时候创建一个分支</td>
+<td align="center">git commit的时候创建一个分支(git init之后不提交是分支不了的)</td>
 </tr>
 <tr>
 <td align="center">git branch -a</td>
-<td align="center">查看所有分支</td>
+<td align="center"><strong>查看</strong>所有分支</td>
 </tr>
 <tr>
 <td align="center">git checkout <em>分支名</em></td>
-<td align="center">切换分支</td>
+<td align="center"><strong>切换</strong>分支</td>
 </tr>
 <tr>
-<td align="center">git merge</td>
-<td align="center">结合分支</td>
+<td align="center">git checkout -b <em>user分支名</em></td>
+<td align="center"><strong>创建并切换</strong>到此user分支</td>
+</tr>
+<tr>
+<td align="center">git branch -d <em>user分支名</em></td>
+<td align="center"><strong>删除</strong>分支</td>
+</tr>
+<tr>
+<td align="center">git merge <em>user</em></td>
+<td align="center"><strong>合并</strong>分支: 切换到master  写git merge <em>order</em> ，有冲突会报 ，去对应文件修改，保存后add 、commit    <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg">https://www.bilibili.com/video/BV1wm4y1z7Dg</a></td>
 </tr>
 </tbody></table>
 <ul>
@@ -213,18 +221,27 @@
 <td align="center"><strong>删除</strong>暂存区的文件</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">git restore <em>a.txt</em></td>
+<td align="center">误删除后未提交,恢复误删除文件(之前commit过的)</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">git revert <em>误删文件后上一个版本号</em></td>
+<td align="center"><strong>还原</strong>：硬重置后,会回到最开始的提交,这样提交过程就消失了;所以此方法恢复当前版本，就要粘贴下一版本号内容,不丢失之前提交信息</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">git tag <em>标签名称</em> <em>版本号</em></td>
+<td align="center">给当前提交版本加上标记&#x3D;&#x3D;起别名：git tag <em>uptfile</em> <em>版本号</em>  之后 再写git tag，之后git log <em>uptfile标签名称</em>   就可以查看历史信息(取代git log <em>版本号</em>的不方便查找)   <strong>可以给每个版本都添加标签但是标签不能重复</strong></td>
+</tr>
+<tr>
+<td align="center">git tag -d <em>标签名称</em></td>
+<td align="center">删除标签</td>
+</tr>
+<tr>
+<td align="center">git checkout -b <em>标签名称</em></td>
+<td align="center">对当前标签所在的提交进行分支创建</td>
 </tr>
 </tbody></table>
+<p>从远程仓库克隆下来的仓库，”origin”来代替远程仓库-地址</p>
 <ul>
 <li>把项目上传到github官方教程</li>
 </ul>
@@ -236,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/10/05/A-Guide-to-Using-Git/" data-id="clnhe4o51000124i27iow7zve" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/10/05/A-Guide-to-Using-Git/" data-id="clnk3q74i0001t4i20twu1hc2" class="article-share-link">
         Share
       </a>
       
