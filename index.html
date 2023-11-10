@@ -66,6 +66,59 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-insert-pic-in-blog" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+  
+  <h2 class="article-title" itemprop="name">
+    <a href="/2023/11/10/insert-pic-in-blog/">insert pic in blog</a>
+  </h2>
+  
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/11/10/insert-pic-in-blog/" class="article-date">
+  <time datetime="2023-11-10T09:26:14.000Z" itemprop="datePublished">2023-11-10</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><img src="/2023/11/10/insert-pic-in-blog/.%5Cinsert-pic-in-blog%5Cbeagle.jpg" alt="beagle"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wantosleep3.github.io/2023/11/10/insert-pic-in-blog/" data-id="closezoqk0000xci24lka6uyu" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-My-Troubleshooting-STM32-Development" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -101,64 +154,17 @@
       
       
         <p><em>HAL库中MQ135空气质量模块的使用，原理是ad采样</em></p>
-<h3 id="C文件"><a href="#C文件" class="headerlink" title="C文件"></a>C文件</h3><p>首先我们看：一个简单的hal库读取的方法，返回一个float类型</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MQ135.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span>  </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> ADC_HandleTypeDef hadc1;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="title function_">Get_Voltage</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint16_t</span> adcx=<span class="number">0</span>;</span><br><span class="line">	<span class="type">float</span> voltage;</span><br><span class="line">	<span class="comment">//启动ADC</span></span><br><span class="line">	HAL_ADC_Start(&amp;hadc1);  </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//等待采集完成</span></span><br><span class="line">	HAL_ADC_PollForConversion(&amp;hadc1,<span class="number">10</span>); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取ADC采集数据</span></span><br><span class="line">	adcx = HAL_ADC_GetValue(&amp;hadc1);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将采集到的数据转换为电压值</span></span><br><span class="line">	voltage = (<span class="type">double</span>)adcx * <span class="number">3.3f</span> / <span class="number">4096</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;转换后的%.3f \r\n&quot;</span>,voltage); <span class="comment">//打印</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//停止ADC</span></span><br><span class="line">	HAL_ADC_Stop(&amp;hadc1); </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> voltage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="头文件：声明此方法"><a href="#头文件：声明此方法" class="headerlink" title="头文件：声明此方法"></a>头文件：声明此方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __MQ135_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	__MQ135_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stm32f1xx_hal.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="title function_">Get_Voltage</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><p>串口打印此函数+显示屏打印此函数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> vol=<span class="number">0</span>;<span class="comment">//声明部分</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//死循环部分</span></span><br><span class="line">vol = Get_Voltage();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;ad采样:%.3f \r\n&quot;</span>,vol);                 <span class="comment">//打印 小数点保留三位</span></span><br><span class="line"><span class="built_in">sprintf</span>( (<span class="type">char</span> *)disPlay, <span class="string">&quot;adc:%.3f     &quot;</span>,vol); <span class="comment">//oled屏输出</span></span><br><span class="line">OLED_ShowString(<span class="number">0</span>,<span class="number">25</span>,disPlay,<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line">OLED_Refresh();<span class="comment">//刷新屏幕</span></span><br><span class="line"></span><br><span class="line">HAL_Delay(<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>看似正常 但是串口输出则是</p>
-<p>​	<strong>子函数</strong>中的打印正常</p>
-<p>​	主函数中的赋值后<strong>新变量</strong>打印却不正常</p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic2.png" alt="pic2" style="zoom:50%;">
-
-
-
-<h3 id="debug过程"><a href="#debug过程" class="headerlink" title="debug过程"></a>debug过程</h3><img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic3.png" alt="pic3" style="zoom:60%;">
-
-<ul>
-<li>此处我加上了volatile便于查看vol的值</li>
-</ul>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic4.png" alt="pic4" style="zoom:60%;">
-
-<ul>
-<li>跳进Get_Voltage()中 局部变量voltage赋值正常</li>
-</ul>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic5.png" alt="pic5" style="zoom:60%;">
-
-<ul>
-<li>回到主函数中却赋值失败 ？</li>
-</ul>
-<p><strong>且语句中有警告</strong></p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic1.png" alt="pic1" style="zoom:60%;">
-
-
-
-
-
-
-
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __MQ135_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	__MQ135_H_</span></span><br></pre></td></tr></table></figure>
-
-<p>上述.h文件中**#ifdef** 少些了一个n    应该为**#ifndef **  否则报警告且float和double无法赋值</p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic6.png" alt="pic6" style="zoom:60%;">
-
-<p>修改后串口和打印均正常</p>
-
+        
+          <p>
+            <a class="article-more-link" href="/2023/11/10/My-Troubleshooting-STM32-Development/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/11/10/My-Troubleshooting-STM32-Development/" data-id="closdff110003pgi228iaho8c" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/11/10/My-Troubleshooting-STM32-Development/" data-id="closecs2h0002roi22e3q3n6k" class="article-share-link">
         Share
       </a>
       
@@ -243,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/10/05/A-Guide-to-Using-Git/" data-id="closdff0k0001pgi24hbye5tb" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/10/05/A-Guide-to-Using-Git/" data-id="closecs2p0004roi2fl5be4wq" class="article-share-link">
         Share
       </a>
       
@@ -291,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/06/30/mark_down_tutorial/" data-id="closdff0r0002pgi2b8f03la5" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/06/30/mark_down_tutorial/" data-id="closecs2m0003roi21lotegp8" class="article-share-link">
         Share
       </a>
       
@@ -350,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/06/29/hello-world/" data-id="closdff140004pgi2aain9pq9" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/06/29/hello-world/" data-id="closecs2a0001roi2euzg8lb2" class="article-share-link">
         Share
       </a>
       

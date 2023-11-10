@@ -71,6 +71,8 @@
       
       
         <p><em>HAL库中MQ135空气质量模块的使用，原理是ad采样</em></p>
+<span id="more"></span>
+
 <h3 id="C文件"><a href="#C文件" class="headerlink" title="C文件"></a>C文件</h3><p>首先我们看：一个简单的hal库读取的方法，返回一个float类型</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MQ135.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;main.h&quot;</span>  </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> ADC_HandleTypeDef hadc1;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="title function_">Get_Voltage</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint16_t</span> adcx=<span class="number">0</span>;</span><br><span class="line">	<span class="type">float</span> voltage;</span><br><span class="line">	<span class="comment">//启动ADC</span></span><br><span class="line">	HAL_ADC_Start(&amp;hadc1);  </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//等待采集完成</span></span><br><span class="line">	HAL_ADC_PollForConversion(&amp;hadc1,<span class="number">10</span>); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取ADC采集数据</span></span><br><span class="line">	adcx = HAL_ADC_GetValue(&amp;hadc1);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将采集到的数据转换为电压值</span></span><br><span class="line">	voltage = (<span class="type">double</span>)adcx * <span class="number">3.3f</span> / <span class="number">4096</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;转换后的%.3f \r\n&quot;</span>,voltage); <span class="comment">//打印</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//停止ADC</span></span><br><span class="line">	HAL_ADC_Stop(&amp;hadc1); </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> voltage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -90,6 +92,7 @@
 <p>看似正常 但是串口输出则是</p>
 <p>​	<strong>子函数</strong>中的打印正常</p>
 <p>​	主函数中的赋值后<strong>新变量</strong>打印却不正常</p>
+<p><img src="/2023/11/10/My-Troubleshooting-STM32-Development/.%5CMy-Troubleshooting-STM32-Development%5Cpic2.png" alt="串口数据"></p>
 <img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic2.png" alt="pic2" style="zoom:50%;">
 
 
@@ -128,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/11/10/My-Troubleshooting-STM32-Development/" data-id="closdff110003pgi228iaho8c" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/11/10/My-Troubleshooting-STM32-Development/" data-id="closecs2h0002roi22e3q3n6k" class="article-share-link">
         Share
       </a>
       
@@ -139,6 +142,15 @@
   
   
 <nav class="article-nav">
+  
+  <a href="/2023/11/10/insert-pic-in-blog/" class="article-nav-link">
+    <strong class="article-nav-caption">Newer</strong>
+    <div class="article-nav-title">
+      
+      insert pic in blog
+      
+    </div>
+  </a>
   
   
   <a href="/2023/10/05/A-Guide-to-Using-Git/" class="article-nav-link">
