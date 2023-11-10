@@ -92,28 +92,27 @@
 <p>看似正常 但是串口输出则是</p>
 <p>​	<strong>子函数</strong>中的打印正常</p>
 <p>​	主函数中的赋值后<strong>新变量</strong>打印却不正常</p>
-<p><img src="/2023/11/10/My-Troubleshooting-STM32-Development/.%5CMy-Troubleshooting-STM32-Development%5Cpic2.png" alt="串口数据"></p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic2.png" alt="pic2" style="zoom:50%;">
+<img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic2.png" alt="pic2" style="zoom:50%;">
 
 
 
-<h3 id="debug过程"><a href="#debug过程" class="headerlink" title="debug过程"></a>debug过程</h3><img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic3.png" alt="pic3" style="zoom:60%;">
+<h3 id="debug过程"><a href="#debug过程" class="headerlink" title="debug过程"></a>debug过程</h3><img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic3.png" alt="pic3" style="zoom:60%;">
 
 <ul>
 <li>此处我加上了volatile便于查看vol的值</li>
 </ul>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic4.png" alt="pic4" style="zoom:60%;">
+<img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic4.png" alt="pic4" style="zoom:60%;">
 
 <ul>
 <li>跳进Get_Voltage()中 局部变量voltage赋值正常</li>
 </ul>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic5.png" alt="pic5" style="zoom:60%;">
+<img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic5.png" alt="pic5" style="zoom:60%;">
 
 <ul>
 <li>回到主函数中却赋值失败 ？</li>
 </ul>
 <p><strong>且语句中有警告</strong></p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic1.png" alt="pic1" style="zoom:60%;">
+<img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic1.png" alt="pic1" style="zoom:60%;">
 
 
 
@@ -124,7 +123,7 @@
 <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __MQ135_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	__MQ135_H_</span></span><br></pre></td></tr></table></figure>
 
 <p>上述.h文件中**#ifdef** 少些了一个n    应该为**#ifndef **  否则报警告且float和double无法赋值</p>
-<img src="/2023/11/10/My-Troubleshooting-STM32-Development/My-Troubleshooting-STM32-Development\pic6.png" alt="pic6" style="zoom:60%;">
+<img src="/2023/11/10/My-Troubleshooting-STM32-Development/pic6.png" alt="pic6" style="zoom:60%;">
 
 <p>修改后串口和打印均正常</p>
 
@@ -147,7 +146,7 @@
     <strong class="article-nav-caption">Newer</strong>
     <div class="article-nav-title">
       
-      如何在blog中内嵌图片
+      (no title)
       
     </div>
   </a>

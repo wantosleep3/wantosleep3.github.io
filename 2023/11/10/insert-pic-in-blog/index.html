@@ -10,7 +10,6 @@
   <meta name="description" content="werwerwerwerwer">
   
   <title>
-    如何在blog中内嵌图片 |
     
     werwerwer&#39;s Blog
   </title>
@@ -39,17 +38,6 @@
 
   <div class="article-inner">
     
-    <header class="article-header">
-      
-  
-  <h1 class="article-title" itemprop="name">
-    如何在blog中内嵌图片
-  </h1>
-  
-  
-
-    </header>
-    
 
     
     <div class="article-meta">
@@ -70,18 +58,39 @@
       
       
       
-        <h1 id="如何在blog中内嵌图片"><a href="#如何在blog中内嵌图片" class="headerlink" title="如何在blog中内嵌图片"></a>如何在blog中内嵌图片</h1><img src="/2023/11/10/insert-pic-in-blog/beagle.jpg" alt="beagle" style="zoom:25%;">
+        <h1 id="如何在blog中正确内嵌图片，不用图床"><a href="#如何在blog中正确内嵌图片，不用图床" class="headerlink" title="如何在blog中正确内嵌图片，不用图床"></a>如何在blog中正确内嵌图片，不用图床</h1><img src="/2023/11/10/insert-pic-in-blog/beagle.jpg" alt="beagle" style="zoom:5%;">
 
 
 
-<p>【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">https://www.bilibili.com/video/BV1D7411U7Yk</a></p>
-<h2 id="卸载已有的插件hexo-asset-image"><a href="#卸载已有的插件hexo-asset-image" class="headerlink" title="卸载已有的插件hexo-asset-image"></a>卸载已有的插件hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save </span><br></pre></td></tr></table></figure>
+<p>参考这位的教程:【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">https://www.bilibili.com/video/BV1D7411U7Yk</a></p>
+<span id="more"></span>
+
+<h2 id="1、修改博客根目录中的-config-yml"><a href="#1、修改博客根目录中的-config-yml" class="headerlink" title="1、修改博客根目录中的 _config.yml"></a>1、修改博客根目录中的 _config.yml</h2><p>新增一条<code>post_asset_folder: true</code> </p>
+<p>这样会使你写一条新博客的时候hexo自动新建一个博文同名文件夹</p>
+<h2 id="2、卸载已有的插件-hexo-asset-image"><a href="#2、卸载已有的插件-hexo-asset-image" class="headerlink" title="2、卸载已有的插件 hexo-asset-image"></a>2、卸载已有的插件 hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save </span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="重新安装"><a href="#重新安装" class="headerlink" title="重新安装"></a>重新安装</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、重新安装hexo-asset-image-插件"><a href="#3、重新安装hexo-asset-image-插件" class="headerlink" title="3、重新安装hexo-asset-image 插件"></a>3、重新安装hexo-asset-image 插件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
 
 
+
+<h2 id="4、新建博客"><a href="#4、新建博客" class="headerlink" title="4、新建博客"></a>4、新建博客</h2><p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5、把图片复制文件夹中"><a href="#5、把图片复制文件夹中" class="headerlink" title="5、把图片复制文件夹中"></a>5、把图片复制文件夹中</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>一定要注意<strong>斜杠的方向</strong>，如果直接是windows路径复制到typora是不能正确生成图片的</p>
+<p>你还可以使用typora自带的缩放，生成也是正常的</p>
+<p>typora缩放25%后的代码长这样：</p>
+<p><code>&lt;img src=&quot;./insert-pic-in-blog/beagle.jpg&quot; alt=&quot;beagle&quot; style=&quot;zoom:25%;&quot; /&gt;</code></p>
+<img src="/2023/11/10/insert-pic-in-blog/beagle.jpg" alt="beagle" style="zoom:25%;">
+
+
+
+<h2 id="6、部署到git"><a href="#6、部署到git" class="headerlink" title="6、部署到git"></a>6、部署到git</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo c <span class="comment">//清理缓存</span></span><br><span class="line">hexo g <span class="comment">//生成</span></span><br><span class="line">hexo s <span class="comment">//部署到本地4000端口检查</span></span><br><span class="line">hexo g <span class="comment">//pr到git 更新博客</span></span><br></pre></td></tr></table></figure>
 
 
       
