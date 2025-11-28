@@ -1,72 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  <title>双向串口通信：STM32(HAL)与OpenMV4 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="双向串口通信：STM32(HAL)与OpenMV4这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双向串口通信：STM32(HAL)与OpenMV4">
+<meta property="og:url" content="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="双向串口通信：STM32(HAL)与OpenMV4这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-28T06:06:03.199Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
   
   
   
-  <title>
-    双向串口通信：STM32(HAL)与OpenMV4 |
+<link rel="stylesheet" href="/css/style.css">
+
+  
     
-    Hexo
-  </title>
-  <!-- Icon -->
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-  
-<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/css/style.css">
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
   
-<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<script src="/wantosleep3/wantosleep3.github.io/js/pace.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-双向串口通信：STM32-HAL-与OpenMV4" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-  
-  <h1 class="article-title" itemprop="name">
-    双向串口通信：STM32(HAL)与OpenMV4
-  </h1>
-  
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/wantosleep3/wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" class="article-date">
-  <time datetime="2024-01-29T16:00:00.000Z" itemprop="datePublished">2024-01-30</time>
-</a>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
       
     </div>
-    
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wantosleep3.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
 
+      <div class="outer">
+        <section id="main"><article id="post-双向串口通信：STM32-HAL-与OpenMV4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" class="article-date">
+  <time class="dt-published" datetime="2024-01-29T16:00:00.000Z" itemprop="datePublished">2024-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
     
     
-<div class="tocbot"></div>
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      双向串口通信：STM32(HAL)与OpenMV4
+    </h1>
+  
 
+      </header>
     
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="双向串口通信：STM32-HAL-与OpenMV4"><a href="#双向串口通信：STM32-HAL-与OpenMV4" class="headerlink" title="双向串口通信：STM32(HAL)与OpenMV4"></a>双向串口通信：STM32(HAL)与OpenMV4</h1><p>这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互</p>
 <h2 id="STM32端配置"><a href="#STM32端配置" class="headerlink" title="STM32端配置"></a>STM32端配置</h2><h3 id="串口初始化设置"><a href="#串口初始化设置" class="headerlink" title="串口初始化设置"></a>串口初始化设置</h3><p>首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的接收中断</p>
@@ -89,166 +115,152 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/wantosleep3/wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidCpfg8UzXurctkwQXEtecB" class="article-share-link">
-        Share
-      </a>
+      <a data-url="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidQlcqMRquiol_dAZR6FcBL" data-title="双向串口通信：STM32(HAL)与OpenMV4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
       
     </footer>
-
   </div>
-
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/11/28/test/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          test
+        
+      </div>
+    </a>
   
   
-<nav class="article-nav">
-  
-  <a href="/wantosleep3/wantosleep3.github.io/2025/11/28/test/" class="article-nav-link">
-    <strong class="article-nav-caption">Newer</strong>
-    <div class="article-nav-title">
-      
-      test
-      
-    </div>
-  </a>
-  
-  
-  <a href="/wantosleep3/wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" class="article-nav-link">
-    <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">如何在blog中正确内嵌图片（不用图床的方式）</div>
-  </a>
+    <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何在blog中正确内嵌图片（不用图床的方式）</div>
+    </a>
   
 </nav>
 
   
-
-  
-  
-  
-  
-
 </article>
+
+
 </section>
-    <footer class="footer">
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo-Tutorials/">Hexo Tutorials</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/how-to-use-Git/" rel="tag">how to use Git?</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/how-to-use-Git/" style="font-size: 10px;">how to use Git?</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">November 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/11/28/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/">双向串口通信：STM32(HAL)与OpenMV4</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/">记录STM32开发中ad采样遇到的double类型无法赋值和debug解决</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/">Uploading Your Project Files to GitHub: A Guide to Using Git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
   <div class="outer">
-    <ul class="list-inline">
-      <li>Hexo &copy; 2025</li>
+    <div id="footer-info" class="inner">
       
-        <li>
-          
-            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
-            
-        </li>
-      
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-    <p><ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul></p>
+      &copy; 2025 Hexo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
   </div>
 </footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
+
+    </div>
+    <nav id="mobile-nav">
   
-  <div class="logo">
-    <a href="/wantosleep3/wantosleep3.github.io/"><img src="/images/hexo.svg" alt="Hexo"></a>
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
   </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/">Home</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/archives">Archives</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/gallery">Gallery</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/about">About</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="Search">
-        <i class="fe fe-search"></i>
-        Search
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-      <a class="nav-item-link" target="_blank" href="/wantosleep3/wantosleep3.github.io/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  
-<script src="/wantosleep3/wantosleep3.github.io/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/wantosleep3/wantosleep3.github.io/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/wantosleep3/wantosleep3.github.io/js/lazyload.min.js"></script>
-
-
-<script src="/wantosleep3/wantosleep3.github.io/js/busuanzi-2.3.pure.min.js"></script>
-
-
-
-<script src="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-
-<script src="/wantosleep3/wantosleep3.github.io/js/tocbot.min.js"></script>
-
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-  });
-</script>
-
-
-
-<script src="/wantosleep3/wantosleep3.github.io/js/ocean.js"></script>
-
 </body>
-
 </html>
