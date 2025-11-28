@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    双向串口通信：STM32(HAL)与OpenMV4 |
+    
+    Hexo
+  </title>
+  <!-- Icon -->
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-双向串口通信：STM32-HAL-与OpenMV4" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+  
+  <h1 class="article-title" itemprop="name">
+    双向串口通信：STM32(HAL)与OpenMV4
+  </h1>
+  
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/wantosleep3/wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" class="article-date">
+  <time datetime="2024-01-29T16:00:00.000Z" itemprop="datePublished">2024-01-30</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h1 id="双向串口通信：STM32-HAL-与OpenMV4"><a href="#双向串口通信：STM32-HAL-与OpenMV4" class="headerlink" title="双向串口通信：STM32(HAL)与OpenMV4"></a>双向串口通信：STM32(HAL)与OpenMV4</h1><p>这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互</p>
+<h2 id="STM32端配置"><a href="#STM32端配置" class="headerlink" title="STM32端配置"></a>STM32端配置</h2><h3 id="串口初始化设置"><a href="#串口初始化设置" class="headerlink" title="串口初始化设置"></a>串口初始化设置</h3><p>首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的接收中断</p>
+<p>代码如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 串口初始化</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;usart.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxFinish;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxCounter;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> rxBuff[<span class="number">50</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> tempBuff;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">USART1_IRQHandler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  HAL_UART_IRQHandler(&amp;huart1);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 检测空闲中断标志位</span></span><br><span class="line">  <span class="keyword">if</span> ((__HAL_UART_GET_FLAG(&amp;huart1, UART_FLAG_IDLE) != RESET))</span><br><span class="line">  &#123;</span><br><span class="line">    rxFinish = <span class="number">1</span>;</span><br><span class="line">    rxCounter = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 清除标志位</span></span><br><span class="line">    __HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_UART_RxCpltCallback</span><span class="params">(UART_HandleTypeDef *huart)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (huart == &amp;huart1)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 把接收到的字节存入缓冲区</span></span><br><span class="line">    rxBuff[rxCounter++] = tempBuff;</span><br><span class="line">    <span class="comment">// 重新开启中断</span></span><br><span class="line">    HAL_UART_Receive_IT(&amp;huart1, &amp;tempBuff, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接收数据解析"><a href="#接收数据解析" class="headerlink" title="接收数据解析"></a>接收数据解析</h3><p>接收到数据后需要按照协议进行解析，这里在 <code>openmv.c</code> 中编写逻辑，定义了帧头 <code>0x2C</code>、<code>0x12</code> 和帧尾 <code>0x5B</code>，只有符合这个格式的数据包才会被处理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;openmv.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxFinish;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxCounter;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> rxBuff[<span class="number">50</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> GetOpenmvDataCount = <span class="number">0</span>;</span><br><span class="line"><span class="type">uint8_t</span> data1 = <span class="number">0</span>, data2 = <span class="number">0</span>, data3 = <span class="number">0</span>, data4 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Receive_Data_From_Openmv</span><span class="params">(<span class="type">uint8_t</span> *com_data)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint8_t</span> i;</span><br><span class="line">    <span class="type">static</span> <span class="type">uint16_t</span> RxBuffer1[<span class="number">10</span>]=&#123;<span class="number">0</span>&#125;;   </span><br><span class="line">    <span class="type">static</span> <span class="type">uint8_t</span> RxState = <span class="number">0</span>;	   		<span class="comment">// 接收状态机</span></span><br><span class="line">    <span class="type">static</span> <span class="type">uint8_t</span> RxFlag1 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断第一个帧头</span></span><br><span class="line">    <span class="keyword">if</span>(RxState==<span class="number">0</span> &amp;&amp; com_data[<span class="number">0</span>]==<span class="number">0x2C</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        RxState=<span class="number">1</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;*Rxstate*等于1了:%d \r\n&quot;</span>,RxState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断第二个帧头</span></span><br><span class="line">    <span class="keyword">if</span>(RxState==<span class="number">1</span> &amp;&amp; com_data[<span class="number">1</span>]==<span class="number">0x12</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        RxState=<span class="number">2</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;*Rxstate*等于2了!:%d \r\n&quot;</span>,RxState);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 接收数据主体</span></span><br><span class="line">    <span class="keyword">if</span>(RxState==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(com_data[<span class="number">6</span>] == <span class="number">0x5B</span>)       <span class="comment">// 简单判断一下长度或者结束符</span></span><br><span class="line">        &#123;</span><br><span class="line">            RxState=<span class="number">3</span>;</span><br><span class="line">            GetOpenmvDataCount++;      </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 校验结束并提取数据</span></span><br><span class="line">    <span class="keyword">if</span>(RxState==<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;*Rxstate*等于3了:%d \r\n&quot;</span>,RxState);</span><br><span class="line">        <span class="keyword">if</span>(com_data[<span class="number">6</span>] == <span class="number">0x5B</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            data1 = com_data[<span class="number">2</span>]; </span><br><span class="line">            data2 = com_data[<span class="number">3</span>];     </span><br><span class="line">            data3 = com_data[<span class="number">4</span>];</span><br><span class="line">            data4 = com_data[<span class="number">5</span>];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*1*:%d \r\n&quot;</span>,data1);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*2*:%d \r\n&quot;</span>,data2);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*3*:%d \r\n&quot;</span>,data3);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;*4*:%d \r\n&quot;</span>,data4);</span><br><span class="line">            </span><br><span class="line">            RxState = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>   <span class="comment">// 接收错误，重置</span></span><br><span class="line">        &#123;</span><br><span class="line">            RxState = <span class="number">0</span>;</span><br><span class="line">            rxCounter=<span class="number">0</span>;   </span><br><span class="line">            <span class="built_in">memset</span>(&amp;rxBuff,<span class="number">0</span>,<span class="keyword">sizeof</span>(rxBuff)); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 异常处理</span></span><br><span class="line">    <span class="keyword">if</span>((RxState!=<span class="number">3</span> &amp;&amp; RxState!=<span class="number">2</span> &amp;&amp; RxState!=<span class="number">1</span> &amp;&amp; RxState!=<span class="number">0</span>)|| com_data[<span class="number">6</span>] != <span class="number">0x5B</span> || com_data[<span class="number">0</span>]!=<span class="number">0x2C</span> ||com_data[<span class="number">1</span>]!=<span class="number">0x12</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        RxState = <span class="number">0</span>;</span><br><span class="line">        rxCounter=<span class="number">0</span>;   </span><br><span class="line">        <span class="built_in">memset</span>(&amp;rxBuff,<span class="number">0</span>,<span class="keyword">sizeof</span>(rxBuff)); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送指令给OpenMV"><a href="#发送指令给OpenMV" class="headerlink" title="发送指令给OpenMV"></a>发送指令给OpenMV</h3><p>STM32向OpenMV发送数据时，为了防止传输过程中丢包，这里采用了一个简单的循环多发几次的策略，格式是用 <code>*</code> 开头，<code>&amp;</code> 结尾</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Send_Data_To_Openmv</span><span class="params">(u8 DataToMV01, u8 DataToMV02)</span></span><br><span class="line">&#123;</span><br><span class="line">    u8 i;</span><br><span class="line">    u8 sendBuf[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环发送5次确保收到</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= <span class="number">4</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">sprintf</span>((<span class="type">char</span> *)sendBuf, <span class="string">&quot;*%d%d&amp;&quot;</span>, DataToMV01, DataToMV02);</span><br><span class="line">        HAL_UART_Transmit(&amp;huart1, sendBuf, <span class="keyword">sizeof</span>(sendBuf), <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="OpenMV4端配置"><a href="#OpenMV4端配置" class="headerlink" title="OpenMV4端配置"></a>OpenMV4端配置</h2><h3 id="初始化串口"><a href="#初始化串口" class="headerlink" title="初始化串口"></a>初始化串口</h3><p>OpenMV端使用Python开发，直接调用 <code>pyb</code> 库即可，注意波特率要和STM32对应</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> pyb <span class="keyword">import</span> UART</span><br><span class="line"></span><br><span class="line">uart = UART(<span class="number">3</span>, <span class="number">115200</span>, timeout_char=<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据解析与回传"><a href="#数据解析与回传" class="headerlink" title="数据解析与回传"></a>数据解析与回传</h3><p>OpenMV这边主要负责两件事：一是把处理好的数据打包发给STM32，二是解析STM32发过来的指令</p>
+<p>发送函数 <code>Send_To_Mcu</code> 将数据按照STM32那边的协议（0x2C, 0x12…）打包</p>
+<p>接收函数 <code>Receive_Prepare</code> 则是一个状态机，用来提取 <code>*</code> 和 <code>&amp;</code> 中间的数字，这里减去48是因为ASCII码的缘故</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">data1 = <span class="number">1</span></span><br><span class="line">data2 = <span class="number">2</span></span><br><span class="line">data3 = <span class="number">3</span></span><br><span class="line">data4 = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">data5 = <span class="number">0</span></span><br><span class="line">data6 = <span class="number">0</span></span><br><span class="line">x = <span class="number">0</span></span><br><span class="line">state = <span class="number">0</span></span><br><span class="line">tx_flag = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">data = [<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送数据给STM32</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Send_To_Mcu</span>():</span><br><span class="line">    <span class="keyword">global</span> data1, data2, data3, data4</span><br><span class="line">    <span class="comment"># 构造数据包：帧头 + 数据 + 帧尾</span></span><br><span class="line">    FH = <span class="built_in">bytearray</span>([<span class="number">0x2C</span>, <span class="number">0x12</span>, data1, data2, data3, data4, <span class="number">0x5B</span>])</span><br><span class="line">    uart.write(FH)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析STM32发来的数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Receive_Prepare</span>(<span class="params">data</span>):</span><br><span class="line">    <span class="keyword">global</span> state, tx_flag, data5, data6</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> state == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> data == <span class="number">0x2A</span>: <span class="comment"># 检测到 &#x27;*&#x27; (0x2A)</span></span><br><span class="line">            state = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            state = <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> state == <span class="number">1</span>:</span><br><span class="line">        state = <span class="number">2</span></span><br><span class="line">        data5 = data - <span class="number">48</span> <span class="comment"># ASCII转数字</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;data5是&#x27;</span>, data5)</span><br><span class="line">    <span class="keyword">elif</span> state == <span class="number">2</span>:</span><br><span class="line">        state = <span class="number">3</span></span><br><span class="line">        data6 = data - <span class="number">48</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;data6是&#x27;</span>, data6)</span><br><span class="line">    <span class="keyword">elif</span> state == <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">if</span> data == <span class="number">0x26</span>: <span class="comment"># 检测到 &#x27;&amp;&#x27; (0x26)</span></span><br><span class="line">            state = <span class="number">4</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;接收完毕&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(data5, data6)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        state = <span class="number">0</span></span><br><span class="line">        data5 = <span class="number">0</span></span><br><span class="line">        data6 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">if</span> uart.<span class="built_in">any</span>() &gt; <span class="number">0</span>:</span><br><span class="line">        c = uart.readchar()</span><br><span class="line">        Receive_Prepare(c)</span><br><span class="line">        <span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/wantosleep3/wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidCpfg8UzXurctkwQXEtecB" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2025/11/28/test/" class="article-nav-link">
+    <strong class="article-nav-caption">Newer</strong>
+    <div class="article-nav-title">
+      
+      test
+      
+    </div>
+  </a>
+  
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">如何在blog中正确内嵌图片（不用图床的方式）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>Hexo &copy; 2025</li>
+      
+        <li>
+          
+            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
+            
+        </li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <p><ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul></p>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/wantosleep3/wantosleep3.github.io/"><img src="/images/hexo.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/wantosleep3/wantosleep3.github.io/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/lazyload.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/ocean.js"></script>
+
+</body>
+
+</html>

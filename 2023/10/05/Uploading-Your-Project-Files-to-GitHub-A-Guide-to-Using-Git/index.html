@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    Uploading Your Project Files to GitHub: A Guide to Using Git |
+    
+    Hexo
+  </title>
+  <!-- Icon -->
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+  
+  <h1 class="article-title" itemprop="name">
+    Uploading Your Project Files to GitHub: A Guide to Using Git
+  </h1>
+  
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/wantosleep3/wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" class="article-date">
+  <time datetime="2023-10-04T16:00:00.000Z" itemprop="datePublished">2023-10-05</time>
+</a>
+      
+<div class="article-category">
+  <a class="article-category-link" href="/wantosleep3/wantosleep3.github.io/categories/Hexo-Tutorials/">Hexo Tutorials</a>
+</div>
+
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h1 id="how-to-use-Git"><a href="#how-to-use-Git" class="headerlink" title="how to use Git?"></a>how to use Git?</h1><h3 id="Git基本操作介绍"><a href="#Git基本操作介绍" class="headerlink" title="Git基本操作介绍"></a>Git基本操作介绍</h3><ul>
+<li>目录的切换</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>git bash输入</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pwd</td>
+<td>显示当前终端会话的目录位置</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>查看当前目录的所有文件</td>
+</tr>
+<tr>
+<td>cd..</td>
+<td>上一级</td>
+</tr>
+<tr>
+<td>cd <em>下一级的目录名</em></td>
+<td>进入下一级</td>
+</tr>
+</tbody></table>
+<ul>
+<li>git</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>git</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git version</td>
+<td>输出版本号</td>
+</tr>
+<tr>
+<td>git config –global user.name <em>你的名字</em></td>
+<td>配置<strong>全局</strong>用户名</td>
+</tr>
+<tr>
+<td>git config –global user.email <em>你的邮箱</em></td>
+<td>配置<strong>全局</strong>邮箱地址</td>
+</tr>
+<tr>
+<td>git init</td>
+<td>初始化</td>
+</tr>
+<tr>
+<td>git add <em>hello.txt</em></td>
+<td>把文件加入git的版本控制系统中</td>
+</tr>
+<tr>
+<td>git add . <em>或者</em> git add * <em>.txt</em></td>
+<td>把当前目录全部文件加入git的版本控制系统中,现在只是暂时保存</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>把上一步(add)的提交,此时进入了_vim终端编辑器_</td>
+</tr>
+</tbody></table>
+<p>​</p>
+<p>​ <em>vim编辑器使用</em></p>
+
+
+
+<ol>
+<li><strong>进入</strong>了vim ，默认是不能写东西的， 要按a或者i进入<strong>编辑模式</strong></li>
+<li>写本次提交的说明</li>
+<li><strong>退出</strong> 先按esc退出编辑模式 再输入英文冒号: w q 保存 退出</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>git</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git log</td>
+<td>查看**日志 ** git log –oneline 打印每行描述</td>
+</tr>
+<tr>
+<td>git commit -m <em>第二次提交</em></td>
+<td>写说明的简单操作 <strong>跳过vim</strong> ，提交后系统打印一串commit id</td>
+</tr>
+<tr>
+<td>git reset –hard <em>粘贴commit id</em></td>
+<td><strong>回退</strong>版本 <em>hard硬重置（覆盖所有变更、soft 、mixed</em></td>
+</tr>
+<tr>
+<td>git branch <em>分支名</em></td>
+<td>git commit的时候创建一个分支(git init之后不提交是分支不了的)</td>
+</tr>
+<tr>
+<td>git branch -a</td>
+<td><strong>查看</strong>所有分支</td>
+</tr>
+<tr>
+<td>git checkout <em>分支名</em></td>
+<td><strong>切换</strong>分支</td>
+</tr>
+<tr>
+<td>git checkout -b <em>user分支名</em></td>
+<td><strong>创建并切换</strong>到此user分支</td>
+</tr>
+<tr>
+<td>git branch -d <em>user分支名</em></td>
+<td><strong>删除</strong>分支</td>
+</tr>
+<tr>
+<td>git merge <em>user</em></td>
+<td><strong>合并</strong>分支: 切换到master 写git merge <em>order</em> ，有冲突会报 ，去对应文件修改，保存后add 、commit <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg">尚硅谷新版Git快速入门(3h迅速掌握git)_哔哩哔哩_bilibili</a></td>
+</tr>
+</tbody></table>
+<ul>
+<li>更多命令行介绍</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>git</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git clone <em>需要下载下来的仓库链接</em> <em>remote-git-resp</em></td>
+<td>将远程仓库的内容完全<strong>下载</strong>到本地的remote-git-resp文件夹</td>
+</tr>
+<tr>
+<td>git config user.name <em>你的名字英文</em></td>
+<td>配置当前仓库的用户名</td>
+</tr>
+<tr>
+<td>git config user.email <em>你的邮箱</em></td>
+<td>配置当前仓库的邮箱</td>
+</tr>
+<tr>
+<td>git status</td>
+<td><strong>查看</strong>暂存区状态</td>
+</tr>
+<tr>
+<td>git rm –cached <em>a.txt</em></td>
+<td><strong>删除</strong>暂存区的文件</td>
+</tr>
+<tr>
+<td>git restore <em>a.txt</em></td>
+<td>误删除后未提交,恢复误删除文件(之前commit过的)</td>
+</tr>
+<tr>
+<td>git revert <em>误删文件后上一个版本号</em></td>
+<td><strong>还原</strong>：硬重置后,会回到最开始的提交,这样提交过程就消失了;所以此方法恢复当前版本，就要粘贴下一版本号内容,不丢失之前提交信息</td>
+</tr>
+<tr>
+<td>git tag <em>标签名称</em> <em>版本号</em></td>
+<td>给当前提交版本加上标记&#x3D;&#x3D;起别名：git tag <em>uptfile</em> <em>版本号</em> 之后 再写git tag，之后git log <em>uptfile标签名称</em> 就可以查看历史信息(取代git log _版本号_的不方便查找) <strong>可以给每个版本都添加标签但是标签不能重复</strong></td>
+</tr>
+<tr>
+<td>git tag -d <em>标签名称</em></td>
+<td>删除标签</td>
+</tr>
+<tr>
+<td>git checkout -b <em>标签名称</em></td>
+<td>对当前标签所在的提交进行分支创建</td>
+</tr>
+</tbody></table>
+<p>从远程仓库克隆下来的仓库，”origin”来代替远程仓库-地址</p>
+<table>
+<thead>
+<tr>
+<th>git remote add origin <em>github仓库地址</em></th>
+<th>增加远程仓库地址，别名为origin</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git remote remove origin</td>
+<td>删除远程仓库地址</td>
+</tr>
+<tr>
+<td>git remote rename origin</td>
+<td>改名</td>
+</tr>
+</tbody></table>
+<p>本地仓库想要推送给的远程仓库从github更换成gitee之后设置ssh：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg/?p=29&spm_id_from=pageDriver&vd_source=bb2ffa36d06143b515b5c6c4aa6e8c3a">29 - Git - 命令 - 远程仓库_哔哩哔哩_bilibili</a></p>
+<ul>
+<li>把项目上传到github 教程</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin 填你的github的仓库链接比如https://github.com/wantosleep3/JavaWebbrand-case.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/wantosleep3/wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" data-id="cuidOxsgrqLrdiRDekDZq2clD" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/wantosleep3/wantosleep3.github.io/tags/how-to-use-Git/" rel="tag">how to use Git?</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/" class="article-nav-link">
+    <strong class="article-nav-caption">Newer</strong>
+    <div class="article-nav-title">
+      
+      记录STM32开发中ad采样遇到的double类型无法赋值和debug解决
+      
+    </div>
+  </a>
+  
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2023/06/30/markdown-tutorial/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">markdown tutorial</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>Hexo &copy; 2025</li>
+      
+        <li>
+          
+            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
+            
+        </li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <p><ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul></p>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/wantosleep3/wantosleep3.github.io/"><img src="/images/hexo.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/wantosleep3/wantosleep3.github.io/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/lazyload.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/ocean.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    如何在blog中正确内嵌图片（不用图床的方式） |
+    
+    Hexo
+  </title>
+  <!-- Icon -->
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-如何在blog中正确内嵌图片（不用图床的方式）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+  
+  <h1 class="article-title" itemprop="name">
+    如何在blog中正确内嵌图片（不用图床的方式）
+  </h1>
+  
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/wantosleep3/wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" class="article-date">
+  <time datetime="2023-11-09T16:00:00.000Z" itemprop="datePublished">2023-11-10</time>
+</a>
+      
+<div class="article-category">
+  <a class="article-category-link" href="/wantosleep3/wantosleep3.github.io/categories/Hexo-Tutorials/">Hexo Tutorials</a>
+</div>
+
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        
+<h2 id="参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml"><a href="#参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml" class="headerlink" title="参考这位的教程:【解决Hexo博客图片无法显示】 解决Hexo博客图片无法显示_哔哩哔哩_bilibilistep1 修改博客根目录中的 _config.yml"></a>参考这位的教程:【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">解决Hexo博客图片无法显示_哔哩哔哩_bilibili</a><br>step1 修改博客根目录中的 _config.yml</h2><p>新增一条<code>post_asset_folder: true</code></p>
+<p>这样会使你写一条新博客的时候hexo自动新建一个博文同名文件夹</p>
+<h2 id="step2-卸载已有的插件-hexo-asset-image"><a href="#step2-卸载已有的插件-hexo-asset-image" class="headerlink" title="step2 卸载已有的插件 hexo-asset-image"></a>step2 卸载已有的插件 hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="step3-重新安装hexo-asset-image-插件"><a href="#step3-重新安装hexo-asset-image-插件" class="headerlink" title="step3 重新安装hexo-asset-image 插件"></a>step3 重新安装hexo-asset-image 插件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="step4-新建博客"><a href="#step4-新建博客" class="headerlink" title="step4 新建博客"></a>step4 新建博客</h2><p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
+<figure class="highlight plaintext"><figcaption><span>asset_img beagle.jpg "图片描述" %&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="step5-把图片复制文件夹中"><a href="#step5-把图片复制文件夹中" class="headerlink" title="step5 把图片复制文件夹中"></a>step5 把图片复制文件夹中</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>一定要注意<strong>斜杠的方向</strong>，如果直接是windows路径复制到typora是不能正确生成图片的</p>
+<p>你还可以使用typora自带的缩放，生成也是正常的</p>
+<p>图片缩放25%后的参数模板：</p>
+<p><code>&lt;img src=&quot;./insert-pic-in-blog/beagle.jpg&quot; alt=&quot;beagle&quot; style=&quot;zoom:25%;&quot; /&gt;</code></p>
+<p></p>
+<p>6、部署到git</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo c <span class="comment">//清理缓存</span></span><br><span class="line">hexo g <span class="comment">//生成</span></span><br><span class="line">hexo s <span class="comment">//部署到本地4000端口检查</span></span><br><span class="line">hexo g <span class="comment">//pr到git 更新博客</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/wantosleep3/wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" data-id="cuid4ovpxN-frd6eU-gdCuySg" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" class="article-nav-link">
+    <strong class="article-nav-caption">Newer</strong>
+    <div class="article-nav-title">
+      
+      双向串口通信：STM32(HAL)与OpenMV4
+      
+    </div>
+  </a>
+  
+  
+  <a href="/wantosleep3/wantosleep3.github.io/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">记录STM32开发中ad采样遇到的double类型无法赋值和debug解决</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>Hexo &copy; 2025</li>
+      
+        <li>
+          
+            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
+            
+        </li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <p><ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul></p>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/wantosleep3/wantosleep3.github.io/"><img src="/images/hexo.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/wantosleep3/wantosleep3.github.io/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/wantosleep3/wantosleep3.github.io/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/lazyload.min.js"></script>
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/wantosleep3/wantosleep3.github.io/js/ocean.js"></script>
+
+</body>
+
+</html>
