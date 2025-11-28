@@ -6,15 +6,15 @@
   
   <title>双向串口通信：STM32(HAL)与OpenMV4 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="双向串口通信：STM32(HAL)与OpenMV4这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的">
+  <meta name="description" content="这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的接收中断 代码如下 123456789101112">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双向串口通信：STM32(HAL)与OpenMV4">
 <meta property="og:url" content="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="双向串口通信：STM32(HAL)与OpenMV4这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的">
+<meta property="og:description" content="这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互 STM32端配置串口初始化设置首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的接收中断 代码如下 123456789101112">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-28T06:06:03.199Z">
+<meta property="article:modified_time" content="2025-11-28T07:53:15.395Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -94,7 +94,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="双向串口通信：STM32-HAL-与OpenMV4"><a href="#双向串口通信：STM32-HAL-与OpenMV4" class="headerlink" title="双向串口通信：STM32(HAL)与OpenMV4"></a>双向串口通信：STM32(HAL)与OpenMV4</h1><p>这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互</p>
+        <p>这是关于STM32（基于HAL库）与OpenMV4之间进行双向串口通信的记录，主要实现STM32向OpenMV发送控制指令，同时OpenMV能将处理后的结果返回给STM32，适用于两个MCU之间的简单交互</p>
 <h2 id="STM32端配置"><a href="#STM32端配置" class="headerlink" title="STM32端配置"></a>STM32端配置</h2><h3 id="串口初始化设置"><a href="#串口初始化设置" class="headerlink" title="串口初始化设置"></a>串口初始化设置</h3><p>首先在STM32端配置串口，这里为了方便接收不定长的数据，使用了空闲中断配合接收回调函数的方式，当然也可以用普通的接收中断</p>
 <p>代码如下</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 串口初始化</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;usart.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxFinish;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> rxCounter;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> rxBuff[<span class="number">50</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="type">uint8_t</span> tempBuff;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">USART1_IRQHandler</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  HAL_UART_IRQHandler(&amp;huart1);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 检测空闲中断标志位</span></span><br><span class="line">  <span class="keyword">if</span> ((__HAL_UART_GET_FLAG(&amp;huart1, UART_FLAG_IDLE) != RESET))</span><br><span class="line">  &#123;</span><br><span class="line">    rxFinish = <span class="number">1</span>;</span><br><span class="line">    rxCounter = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 清除标志位</span></span><br><span class="line">    __HAL_UART_CLEAR_IDLEFLAG(&amp;huart1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">HAL_UART_RxCpltCallback</span><span class="params">(UART_HandleTypeDef *huart)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> (huart == &amp;huart1)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 把接收到的字节存入缓冲区</span></span><br><span class="line">    rxBuff[rxCounter++] = tempBuff;</span><br><span class="line">    <span class="comment">// 重新开启中断</span></span><br><span class="line">    HAL_UART_Receive_IT(&amp;huart1, &amp;tempBuff, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -115,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidQlcqMRquiol_dAZR6FcBL" data-title="双向串口通信：STM32(HAL)与OpenMV4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidxU5I-nelufFcICRrZtDsX" data-title="双向串口通信：STM32(HAL)与OpenMV4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
