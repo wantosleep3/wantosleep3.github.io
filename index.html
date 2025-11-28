@@ -96,7 +96,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2025/11/28/test/" data-id="cuidzUcPfYfjJqK3cXEG-uIEq" data-title="test" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2025/11/28/test/" data-id="cuidD8HwVN8s2B0FGHoAkIurV" data-title="test" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -139,71 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuid5F_-PrgnOOzoptHnfR-Hl" data-title="双向串口通信：STM32(HAL)与OpenMV4" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-如何在blog中正确内嵌图片（不用图床的方式）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2023-11-09T16:00:00.000Z" itemprop="datePublished">2023-11-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo-Tutorials/">Hexo Tutorials</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-
-<span id="more"></span>
-
-<h2 id="参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml"><a href="#参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml" class="headerlink" title="参考这位的教程:【解决Hexo博客图片无法显示】 解决Hexo博客图片无法显示_哔哩哔哩_bilibilistep1 修改博客根目录中的 _config.yml"></a>参考这位的教程:【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">解决Hexo博客图片无法显示_哔哩哔哩_bilibili</a><br>step1 修改博客根目录中的 _config.yml</h2><p>新增一条<code>post_asset_folder: true</code></p>
-<p>这样会使你写一条新博客的时候hexo自动新建一个博文同名文件夹</p>
-<h2 id="step2-卸载已有的插件-hexo-asset-image"><a href="#step2-卸载已有的插件-hexo-asset-image" class="headerlink" title="step2 卸载已有的插件 hexo-asset-image"></a>step2 卸载已有的插件 hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="step3-重新安装hexo-asset-image-插件"><a href="#step3-重新安装hexo-asset-image-插件" class="headerlink" title="step3 重新安装hexo-asset-image 插件"></a>step3 重新安装hexo-asset-image 插件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="step4-新建博客"><a href="#step4-新建博客" class="headerlink" title="step4 新建博客"></a>step4 新建博客</h2><p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
-<figure class="highlight plaintext"><figcaption><span>asset_img beagle.jpg "图片描述" %&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="step5-把图片复制文件夹中"><a href="#step5-把图片复制文件夹中" class="headerlink" title="step5 把图片复制文件夹中"></a>step5 把图片复制文件夹中</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
-
-<p>一定要注意<strong>斜杠的方向</strong>，如果直接是windows路径复制到typora是不能正确生成图片的</p>
-<p>你还可以使用typora自带的缩放，生成也是正常的</p>
-<p>图片缩放25%后的参数模板：</p>
-<p><code>&lt;img src=&quot;./insert-pic-in-blog/beagle.jpg&quot; alt=&quot;beagle&quot; style=&quot;zoom:25%;&quot; /&gt;</code></p>
-<p></p>
-<p>6、部署到git</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo c <span class="comment">//清理缓存</span></span><br><span class="line">hexo g <span class="comment">//生成</span></span><br><span class="line">hexo s <span class="comment">//部署到本地4000端口检查</span></span><br><span class="line">hexo g <span class="comment">//pr到git 更新博客</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" data-id="cuidzu-RK94Tr72om49odXfHx" data-title="如何在blog中正确内嵌图片（不用图床的方式）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" data-id="cuidMAMJljBoN_EVU9sadJHIn" data-title="双向串口通信：STM32(HAL)与OpenMV4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -246,7 +182,69 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/" data-id="cuidPAubqycmmcV30svy4Hexi" data-title="记录STM32开发中ad采样遇到的double类型无法赋值和debug解决" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/" data-id="cuiduVSBM_bR8HyYs4yh0nB55" data-title="记录STM32开发中ad采样遇到的double类型无法赋值和debug解决" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-如何在blog中正确内嵌图片（不用图床的方式）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2023-11-09T16:00:00.000Z" itemprop="datePublished">2023-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+
+
+
+
+<h2 id="参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml"><a href="#参考这位的教程-【解决Hexo博客图片无法显示】-解决Hexo博客图片无法显示-哔哩哔哩-bilibilistep1-修改博客根目录中的-config-yml" class="headerlink" title="参考这位的教程:【解决Hexo博客图片无法显示】 解决Hexo博客图片无法显示_哔哩哔哩_bilibilistep1 修改博客根目录中的 _config.yml"></a>参考这位的教程:【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">解决Hexo博客图片无法显示_哔哩哔哩_bilibili</a><br>step1 修改博客根目录中的 _config.yml</h2><p>新增一条<code>post_asset_folder: true</code></p>
+<p>这样会使你写一条新博客的时候hexo自动新建一个博文同名文件夹</p>
+<h2 id="step2-卸载已有的插件-hexo-asset-image"><a href="#step2-卸载已有的插件-hexo-asset-image" class="headerlink" title="step2 卸载已有的插件 hexo-asset-image"></a>step2 卸载已有的插件 hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="step3-重新安装hexo-asset-image-插件"><a href="#step3-重新安装hexo-asset-image-插件" class="headerlink" title="step3 重新安装hexo-asset-image 插件"></a>step3 重新安装hexo-asset-image 插件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="step4-新建博客"><a href="#step4-新建博客" class="headerlink" title="step4 新建博客"></a>step4 新建博客</h2><p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
+<figure class="highlight plaintext"><figcaption><span>asset_img beagle.jpg "图片描述" %&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="step5-把图片复制文件夹中"><a href="#step5-把图片复制文件夹中" class="headerlink" title="step5 把图片复制文件夹中"></a>step5 把图片复制文件夹中</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>一定要注意<strong>斜杠的方向</strong>，如果直接是windows路径复制到typora是不能正确生成图片的</p>
+<p>你还可以使用typora自带的缩放，生成也是正常的</p>
+<p>图片缩放25%后的参数模板：</p>
+<p><code>&lt;img src=&quot;./insert-pic-in-blog/beagle.jpg&quot; alt=&quot;beagle&quot; style=&quot;zoom:25%;&quot; /&gt;</code></p>
+<p></p>
+<p>6、部署到git</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo c <span class="comment">//清理缓存</span></span><br><span class="line">hexo g <span class="comment">//生成</span></span><br><span class="line">hexo s <span class="comment">//部署到本地4000端口检查</span></span><br><span class="line">hexo g <span class="comment">//pr到git 更新博客</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" data-id="cuidX7PxPXaCBMptUaE3qP0xG" data-title="如何在blog中正确内嵌图片（不用图床的方式）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -293,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" data-id="cuid3rypk8O08cs5xsy8obCi3" data-title="Uploading Your Project Files to GitHub: A Guide to Using Git" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" data-id="cuidK12YiBwQMq-h__TBEjY6a" data-title="Uploading Your Project Files to GitHub: A Guide to Using Git" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -329,77 +327,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
-
-<p>This markdown tutorial provides a comprehensive guide on how to format and structure text using markdown syntax, enabling you to create well-organized and visually appealing content for various purposes.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"># 标题<span class="number">1</span></span><br><span class="line">## 标题<span class="number">2</span></span><br><span class="line">### 标题<span class="number">3</span></span><br><span class="line">#### 标题<span class="number">4</span></span><br><span class="line">##### 标题<span class="number">5</span></span><br><span class="line">###### 标题<span class="number">6</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;这是引用</span><br><span class="line"></span><br><span class="line">[<span class="number">8</span>分钟让你快速掌握<span class="title class_">Markdown</span>_哔哩哔哩_bilibili](<span class="attr">https</span>:<span class="comment">//www.bilibili.com/video/BV1JA411h7Gw/?spm_id_from=333.337.search-card.all.click&amp;vd_source=bb2ffa36d06143b515b5c6c4aa6e8c3a)</span></span><br><span class="line"></span><br><span class="line">有序列表把大象放进冰箱： </span><br><span class="line"><span class="number">1.</span> 打开冰箱  （记得放空格）</span><br><span class="line"><span class="number">2.</span> 把大象塞进去</span><br><span class="line"><span class="number">3.</span> 关上冰箱</span><br><span class="line"></span><br><span class="line">无序列表:</span><br><span class="line">- aaaaaaaaaa</span><br><span class="line">- bbbbbbbbbbb</span><br><span class="line">*哈哈哈</span><br><span class="line">*哦哦哦</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">任务列表 明天要做什么:</span><br><span class="line">- [ ] 吃饭</span><br><span class="line">- [ ] 睡觉</span><br><span class="line">- [x] 打豆豆</span><br><span class="line"></span><br><span class="line">代码块: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//	```c</span></span><br><span class="line"><span class="comment">//	int main()</span></span><br><span class="line"><span class="comment">//	&#123;</span></span><br><span class="line"><span class="comment">//		return 0;</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br><span class="line"><span class="comment">//```</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">数学公式：</span><br><span class="line">$$</span><br><span class="line">y=<span class="number">2</span>\sqrt&#123;x&#125;+z</span><br><span class="line">$$</span><br><span class="line"></span><br><span class="line">表格：</span><br><span class="line">|姓名|年龄|成绩|</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|啊啊啊啊啊|<span class="number">19</span>|<span class="number">99</span>|</span><br><span class="line">|灌灌灌灌|<span class="number">19</span>|<span class="number">100</span>|</span><br><span class="line"></span><br><span class="line">脚注：</span><br><span class="line">我是脚注[^你来了]</span><br><span class="line"></span><br><span class="line">[^你来了]:我是脚注啊</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">横线:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">哈哈哈哈</span><br><span class="line"></span><br><span class="line">超链接：</span><br><span class="line">[百度](baidu.<span class="property">com</span> <span class="string">&quot;一个搜索引擎呢&quot;</span>)</span><br><span class="line"></span><br><span class="line">引用链接：</span><br><span class="line">[百度][id]  [百度][id]  [百度][id]</span><br><span class="line"></span><br><span class="line">[id]: google.<span class="property">com</span> <span class="string">&quot;一个搜索引擎g&quot;</span></span><br><span class="line"></span><br><span class="line">链接到标题:(注意链接的名字要和标题的名字完全一样)</span><br><span class="line">请参考[标题<span class="number">1</span>](#标题<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">URL</span>：</span><br><span class="line"><span class="attr">http</span>:<span class="comment">//www.baidu.com</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line">![百度](<span class="attr">https</span>:<span class="comment">//pic2.zhimg.com/v2-e93d01064dffbd28d44b28299f8bfc91_r.jpg)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> *斜体* </span><br><span class="line"> **加粗**  </span><br><span class="line">行内代码<span class="string">`printf()`</span></span><br><span class="line"></span><br><span class="line">&lt;u&gt;下划线&lt;/u&gt;</span><br><span class="line"></span><br><span class="line"><span class="attr">emoji</span>:</span><br><span class="line">:<span class="attr">smile</span>:</span><br><span class="line"></span><br><span class="line">行内数学公式：</span><br><span class="line">$\theta=x^<span class="number">2</span>$</span><br><span class="line"></span><br><span class="line">下标:</span><br><span class="line">H~<span class="number">2</span>~O</span><br><span class="line"></span><br><span class="line">上标:</span><br><span class="line">X^<span class="number">2</span>^</span><br><span class="line"></span><br><span class="line">==高亮文字==</span><br><span class="line"></span><br><span class="line">b站视频的嵌入链接</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>效果查看</p>
-<h1 id="标题1"><a href="#标题1" class="headerlink" title="标题1"></a>标题1</h1><h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><h3 id="标题3"><a href="#标题3" class="headerlink" title="标题3"></a>标题3</h3><h4 id="标题4"><a href="#标题4" class="headerlink" title="标题4"></a>标题4</h4><h5 id="标题5"><a href="#标题5" class="headerlink" title="标题5"></a>标题5</h5><h6 id="标题6"><a href="#标题6" class="headerlink" title="标题6"></a>标题6</h6><blockquote>
-<p>这是引用</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JA411h7Gw/?spm_id_from=333.337.search-card.all.click&vd_source=bb2ffa36d06143b515b5c6c4aa6e8c3a">8分钟让你快速掌握Markdown_哔哩哔哩_bilibili</a></p>
-<p>有序列表把大象放进冰箱： </p>
-<ol>
-<li>打开冰箱  （记得放空格）</li>
-<li>把大象塞进去</li>
-<li>关上冰箱</li>
-</ol>
-<p>无序列表:</p>
-<ul>
-<li>aaaaaaaaaa</li>
-<li>bbbbbbbbbbb<br>*哈哈哈<br>*哦哦哦</li>
-</ul>
-<p>任务列表 明天要做什么:</p>
-<ul>
-<li><input disabled type="checkbox"> 吃饭</li>
-<li><input disabled type="checkbox"> 睡觉</li>
-<li><input checked disabled type="checkbox"> 打豆豆</li>
-</ul>
-<p>代码块: </p>
-<p>&#x2F;&#x2F;	<code>c //	int main() //	{ //		return 0; //	} //</code></p>
-<p>数学公式：<br>$$<br>y&#x3D;2\sqrt{x}+z<br>$$</p>
-<p>表格：</p>
-<table>
-<thead>
-<tr>
-<th align="left">姓名</th>
-<th align="center">年龄</th>
-<th align="right">成绩</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">啊啊啊啊啊</td>
-<td align="center">19</td>
-<td align="right">99</td>
-</tr>
-<tr>
-<td align="left">灌灌灌灌</td>
-<td align="center">19</td>
-<td align="right">100</td>
-</tr>
-</tbody></table>
-<p>脚注：<br>我是脚注<a href="%E6%88%91%E6%98%AF%E8%84%9A%E6%B3%A8%E5%95%8A">^你来了</a></p>
-<p>横线:</p>
-<hr>
-<p>哈哈哈哈</p>
-<p>超链接：<br><a href="baidu.com" title="一个搜索引擎呢">百度</a></p>
-<p>引用链接：<br><a href="google.com" title="一个搜索引擎g">百度</a>  <a href="google.com" title="一个搜索引擎g">百度</a>  <a href="google.com" title="一个搜索引擎g">百度</a></p>
-<p>链接到标题:(注意链接的名字要和标题的名字完全一样)<br>请参考<a href="#%E6%A0%87%E9%A2%981">标题1</a></p>
-<p>URL：<br><a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
-<p>图片：<br><img src="https://pic2.zhimg.com/v2-e93d01064dffbd28d44b28299f8bfc91_r.jpg" alt="百度"></p>
-<p> <em>斜体</em><br> <strong>加粗</strong><br>行内代码<code>printf()</code></p>
-<p><u>下划线</u></p>
-<p>emoji:<br>:smile:</p>
-<p>行内数学公式：<br>$\theta&#x3D;x^2$</p>
-<p>下标:<br>H<del>2</del>O</p>
-<p>上标:<br>X^2^</p>
-<p>&#x3D;&#x3D;高亮文字&#x3D;&#x3D;</p>
-<p>b站视频的嵌入链接</p>
-
+        <p>This markdown tutorial provides a comprehensive guide on how to format and structure text using markdown syntax, enabling you to create well-organized and visually appealing content for various purposes.</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/06/30/markdown-tutorial/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/06/30/markdown-tutorial/" data-id="cuidCsSgD_LsoqIuUGtVZe9iM" data-title="markdown tutorial" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2023/06/30/markdown-tutorial/" data-id="cuidToN5EwcGVaEjnobzjyx7u" data-title="markdown tutorial" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -433,25 +370,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+        <p>A quick overview of commonly used instructions</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/06/29/how-to-deploy-hexo-Blogs/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/06/29/how-to-deploy-hexo-Blogs/" data-id="cuidVMeCaVfGrIbAJZdEMFiFi" data-title="how to deploy hexo Blogs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://wantosleep3.github.io/2023/06/29/how-to-deploy-hexo-Blogs/" data-id="cuidsdiBmOyYnZvPuocKaUYTX" data-title="how to deploy hexo Blogs" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -523,11 +451,11 @@
           </li>
         
           <li>
-            <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
+            <a href="/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/">记录STM32开发中ad采样遇到的double类型无法赋值和debug解决</a>
           </li>
         
           <li>
-            <a href="/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/">记录STM32开发中ad采样遇到的double类型无法赋值和debug解决</a>
+            <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
           </li>
         
           <li>
