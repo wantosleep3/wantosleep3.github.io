@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>记一个LED选型坑 Bin Code怎么看（以Everlight 19-337C为例） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="最近在做RGB灯效，选了亿光的19-337C&#x2F;RSBHGHC-A01&#x2F;2T。画板子前得看清Bin Code，不然容易踩坑。这是一颗常见的SMD RGB LED，我也借此记录下怎么看参数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一个LED选型坑 Bin Code怎么看（以Everlight 19-337C为例）">
+<meta property="og:url" content="https://wantosleep3.github.io/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在做RGB灯效，选了亿光的19-337C&#x2F;RSBHGHC-A01&#x2F;2T。画板子前得看清Bin Code，不然容易踩坑。这是一颗常见的SMD RGB LED，我也借此记录下怎么看参数。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-11T06:46:16.694Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wantosleep3.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-记一个LED选型坑-Bin-Code怎么看（以Everlight-19-337C为例）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T16:00:00.000Z" itemprop="datePublished">2025-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      记一个LED选型坑 Bin Code怎么看（以Everlight 19-337C为例）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近在做RGB灯效，选了亿光的19-337C&#x2F;RSBHGHC-A01&#x2F;2T。画板子前得看清Bin Code，不然容易踩坑。这是一颗常见的SMD RGB LED，我也借此记录下怎么看参数。</p>
+<span id="more"></span>
+
+
+<h2 id="什么是Bin-Code"><a href="#什么是Bin-Code" class="headerlink" title="什么是Bin Code"></a>什么是Bin Code</h2><p>灯珠生产没法做到完全一样。同一批出来的货，亮度、颜色、电压都有偏差。厂家把参数相近的挑出来放一起，这个动作叫Binning。那个分类代码就是Bin Code</p>
+<p>不注意这个，买两卷灯带可能一黄一绿，或者亮度看起来一深一浅</p>
+<h2 id="翻看规格书"><a href="#翻看规格书" class="headerlink" title="翻看规格书"></a>翻看规格书</h2><p>规格书地址 <a target="_blank" rel="noopener" href="https://www.everlighteurope.com/custom/files/datasheets/DSE-0009219.pdf">https://www.everlighteurope.com/custom/files/datasheets/DSE-0009219.pdf</a></p>
+<p>这颗料是RGB三合一，打开规格书第4页。重点看红(RS)、蓝(BH)、绿(GH)这三个部分</p>
+<h3 id="亮度分档"><a href="#亮度分档" class="headerlink" title="亮度分档"></a>亮度分档</h3><p>肉眼看亮度最明显。规格书把亮度分了几档。</p>
+
+
+<p><strong>红灯(RS)</strong><br>S1档 180到225 mcd<br>S2档 225到285 mcd<br>T1档 285到360 mcd</p>
+<p><strong>绿灯(GH)</strong><br>U1档 450到570 mcd<br>U2档 570到720 mcd<br>V1档 720到900 mcd</p>
+<p><strong>蓝灯(BH)</strong><br>Q1档 72到90 mcd<br>Q2档 90到112 mcd<br>R1档 112到140 mcd</p>
+<p>你看绿色的亮度远高于蓝色，这是材料决定的。写代码调白光的时候别给一样的PWM。全给100%占空比，出来的光肯定发绿。</p>
+<h3 id="颜色波长"><a href="#颜色波长" class="headerlink" title="颜色波长"></a>颜色波长</h3><p>人眼对绿色很敏感。波长稍微差一点，就能看出翠绿和黄绿的区别。</p>
+<p>这颗料的红光和蓝光没细分。绿光(GH)专门分了两档。<br>Y档 525到530 nm<br>Z档 530到535 nm</p>
+<p>做屏幕或者背光一定要买同一个Bin，混着用会有色差。</p>
+<h2 id="货到了怎么认"><a href="#货到了怎么认" class="headerlink" title="货到了怎么认"></a>货到了怎么认</h2><p>看卷盘上的标签，参照规格书第9页的说明。</p>
+
+
+<p>CAT 代表亮度<br>HUE 代表颜色波长<br>REF 代表电压</p>
+<p>如果标签写着 CAT S2，HUE -，REF 2.0。意思就是这盘红灯亮度在225到285 mcd之间</p>
+<h2 id="软件怎么补"><a href="#软件怎么补" class="headerlink" title="软件怎么补"></a>软件怎么补</h2><p>买不到同一个Bin怎么办？只能靠软件补。</p>
+<p>比如一批S1较暗，一批T1较亮。硬件贴完了改不了，代码里就留个系数。针对不同批次调整PWM最大值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义不同Bin的系数</span></span><br><span class="line"><span class="comment">// 假设T1最亮，以此为基准</span></span><br><span class="line"><span class="comment">// S2暗一点，系数给大点或者反过来降低T1的输出</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BIN_RED_S1_FACTOR  1.00f   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BIN_RED_S2_FACTOR  0.80f   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BIN_RED_T1_FACTOR  0.63f   </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当前批次配置</span></span><br><span class="line"><span class="type">float</span> current_red_factor = BIN_RED_S2_FACTOR;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Set_LED_Red_PWM</span><span class="params">(<span class="type">uint8_t</span> duty)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 算一下补偿后的值</span></span><br><span class="line">    <span class="type">uint16_t</span> compensated_duty = (<span class="type">uint16_t</span>)(duty * current_red_factor);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出给定时器</span></span><br><span class="line">    __HAL_TIM_SET_COMPARE(&amp;htim3, TIM_CHANNEL_1, compensated_duty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="几点经验"><a href="#几点经验" class="headerlink" title="几点经验"></a>几点经验</h2><p>下单尽量只买同一个Bin。<br>收货核对标签，别混料。<br>写驱动留点余量，别把亮度写死</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wantosleep3.github.io/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/" data-id="cuidgZynv7IiWPjkzWfDLyDvP" data-title="记一个LED选型坑 Bin Code怎么看（以Everlight 19-337C为例）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">双向串口通信：STM32(HAL)与OpenMV4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo-Tutorials/">Hexo Tutorials</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/how-to-use-Git/" rel="tag">how to use Git?</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/how-to-use-Git/" style="font-size: 10px;">how to use Git?</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/">记一个LED选型坑 Bin Code怎么看（以Everlight 19-337C为例）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/30/%E5%8F%8C%E5%90%91%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1%EF%BC%9ASTM32-HAL-%E4%B8%8EOpenMV4/">双向串口通信：STM32(HAL)与OpenMV4</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/">如何在blog中正确内嵌图片（不用图床的方式）</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/10/%E8%AE%B0%E5%BD%95STM32%E5%BC%80%E5%8F%91%E4%B8%ADad%E9%87%87%E6%A0%B7%E9%81%87%E5%88%B0%E7%9A%84double%E7%B1%BB%E5%9E%8B%E6%97%A0%E6%B3%95%E8%B5%8B%E5%80%BC%E5%92%8Cdebug%E8%A7%A3%E5%86%B3/">记录STM32开发中ad采样遇到的double类型无法赋值和debug解决</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/">Uploading Your Project Files to GitHub: A Guide to Using Git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 Hexo<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
