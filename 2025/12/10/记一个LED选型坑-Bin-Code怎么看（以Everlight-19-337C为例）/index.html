@@ -74,6 +74,15 @@
 
 <h2 id="什么是Bin-Code"><a href="#什么是Bin-Code" class="headerlink" title="什么是Bin Code"></a>什么是Bin Code</h2><p>灯珠生产没法做到完全一样。同一批出来的货，亮度、颜色、电压都有偏差。厂家把参数相近的挑出来放一起，这个动作叫Binning。那个分类代码就是Bin Code</p>
 <p>不注意这个，买两卷灯带可能一黄一绿，或者亮度看起来一深一浅</p>
+<h3 id="Bin的本质：三个参数的交集"><a href="#Bin的本质：三个参数的交集" class="headerlink" title="Bin的本质：三个参数的交集"></a>Bin的本质：三个参数的交集</h3><p>这里多说一句，很多人误以为 Bin Code 只是分一下颜色（色温）。其实没那么简单。对于工业级 LED，Bin 是一个<strong>多参数混合锁定</strong>的概念。</p>
+<p>你可以把它理解为一个三维坐标，一颗灯珠必须同时满足三个维度的要求，才能被扔进同一个“筐”：</p>
+<ol>
+<li><strong>光强 (Luminous Intensity, Iv)</strong>：决定灯有多亮。</li>
+<li><strong>主波长 (Dominant Wavelength, λd)</strong>：决定颜色的偏差（比如绿光是偏黄还是偏翠）。</li>
+<li><strong>正向电压 (Forward Voltage, VF)</strong>：决定灯的导通电压范围，影响电路设计的匹配。</li>
+</ol>
+<p>在亿光的标签定义里，这三个维度分别对应了 <strong>CAT</strong> (亮度)、<strong>HUE</strong> (色相&#x2F;波长) 和 <strong>REF</strong> (电压)</p>
+<p><strong>重点来了</strong>：一个完整的 Bin 必须是这三者的组合（比如 <code>CAT:S2</code> + <code>HUE:Y</code> + <code>REF:2.0</code>）。只看其中任何一个参数对上，都不算同一批货</p>
 <h2 id="翻看规格书"><a href="#翻看规格书" class="headerlink" title="翻看规格书"></a>翻看规格书</h2><p>规格书地址 <a target="_blank" rel="noopener" href="https://www.everlighteurope.com/custom/files/datasheets/DSE-0009219.pdf">https://www.everlighteurope.com/custom/files/datasheets/DSE-0009219.pdf</a></p>
 <p>这颗料是RGB三合一，打开规格书第4页。重点看红(RS)、蓝(BH)、绿(GH)这三个部分</p>
 <h3 id="亮度分档"><a href="#亮度分档" class="headerlink" title="亮度分档"></a>亮度分档</h3><p>肉眼看亮度最明显。规格书把亮度分了几档。</p>
@@ -100,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/" data-id="cuidyG8j0k3Gp9FiYBVzr_-QI" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2025/12/10/%E8%AE%B0%E4%B8%80%E4%B8%AALED%E9%80%89%E5%9E%8B%E5%9D%91-Bin-Code%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%88%E4%BB%A5Everlight-19-337C%E4%B8%BA%E4%BE%8B%EF%BC%89/" data-id="cuidsmYUMxkUudETRM48NczYm" class="article-share-link">
         Share
       </a>
       
