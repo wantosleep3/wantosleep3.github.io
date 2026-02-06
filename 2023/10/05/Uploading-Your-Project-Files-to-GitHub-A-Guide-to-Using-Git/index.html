@@ -74,209 +74,79 @@
       
         <p>how to use Git?</p>
 <span id="more"></span>
-
-<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
-<h3 id="Git基本操作介绍"><a href="#Git基本操作介绍" class="headerlink" title="Git基本操作介绍"></a>Git基本操作介绍</h3><ul>
+<p>===============</p>
+<h3 id="Git基本操作介绍">Git基本操作介绍</h3>
+<ul>
 <li>目录的切换</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>git bash输入</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pwd</td>
-<td>显示当前终端会话的目录位置</td>
-</tr>
-<tr>
-<td>ls</td>
-<td>查看当前目录的所有文件</td>
-</tr>
-<tr>
-<td>cd..</td>
-<td>上一级</td>
-</tr>
-<tr>
-<td>cd <em>下一级的目录名</em></td>
-<td>进入下一级</td>
-</tr>
-</tbody></table>
+<p>| git bash输入   | 解释                                |<br>
+| ------------ | --------------------------------- |<br>
+| pwd          | 显示当前终端会话的目录位置                     |<br>
+| ls           | 查看当前目录的所有文件                       |<br>
+| cd..         | 上一级                               |<br>
+| cd <em>下一级的目录名</em> | 进入下一级 |</p>
 <ul>
 <li>git</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>git</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git version</td>
-<td>输出版本号</td>
-</tr>
-<tr>
-<td>git config –global user.name <em>你的名字</em></td>
-<td>配置<strong>全局</strong>用户名</td>
-</tr>
-<tr>
-<td>git config –global user.email <em>你的邮箱</em></td>
-<td>配置<strong>全局</strong>邮箱地址</td>
-</tr>
-<tr>
-<td>git init</td>
-<td>初始化</td>
-</tr>
-<tr>
-<td>git add <em>hello.txt</em></td>
-<td>把文件加入git的版本控制系统中</td>
-</tr>
-<tr>
-<td>git add . <em>或者</em> git add * <em>.txt</em></td>
-<td>把当前目录全部文件加入git的版本控制系统中,现在只是暂时保存</td>
-</tr>
-<tr>
-<td>git commit</td>
-<td>把上一步(add)的提交,此时进入了_vim终端编辑器_</td>
-</tr>
-</tbody></table>
+<p>| git                                  | 解释                              |<br>
+| ------------------------------------ | ------------------------------- |<br>
+| git version                          | 输出版本号                           |<br>
+| git config –global user.name <em>你的名字</em>  | 配置<strong>全局</strong>用户名                     |<br>
+| git config –global user.email <em>你的邮箱</em> | 配置<strong>全局</strong>邮箱地址                    |<br>
+| git init                             | 初始化                             |<br>
+| git add <em>hello.txt</em>                  | 把文件加入git的版本控制系统中                |<br>
+| git add . <em>或者</em> git add * <em>.txt</em>      | 把当前目录全部文件加入git的版本控制系统中,现在只是暂时保存 |<br>
+| git commit                           | 把上一步(add)的提交,此时进入了_vim终端编辑器_    |</p>
 <p>​</p>
 <p>​ <em>vim编辑器使用</em></p>
 <img src="/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/vim.png" class="" title="vim的使用">
-
 <ol>
 <li><strong>进入</strong>了vim ，默认是不能写东西的， 要按a或者i进入<strong>编辑模式</strong></li>
 <li>写本次提交的说明</li>
 <li><strong>退出</strong> 先按esc退出编辑模式 再输入英文冒号: w q 保存 退出</li>
 </ol>
-<table>
-<thead>
-<tr>
-<th>git</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git log</td>
-<td>查看**日志 ** git log –oneline 打印每行描述</td>
-</tr>
-<tr>
-<td>git commit -m <em>第二次提交</em></td>
-<td>写说明的简单操作 <strong>跳过vim</strong> ，提交后系统打印一串commit id</td>
-</tr>
-<tr>
-<td>git reset –hard <em>粘贴commit id</em></td>
-<td><strong>回退</strong>版本 <em>hard硬重置（覆盖所有变更、soft 、mixed</em></td>
-</tr>
-<tr>
-<td>git branch <em>分支名</em></td>
-<td>git commit的时候创建一个分支(git init之后不提交是分支不了的)</td>
-</tr>
-<tr>
-<td>git branch -a</td>
-<td><strong>查看</strong>所有分支</td>
-</tr>
-<tr>
-<td>git checkout <em>分支名</em></td>
-<td><strong>切换</strong>分支</td>
-</tr>
-<tr>
-<td>git checkout -b <em>user分支名</em></td>
-<td><strong>创建并切换</strong>到此user分支</td>
-</tr>
-<tr>
-<td>git branch -d <em>user分支名</em></td>
-<td><strong>删除</strong>分支</td>
-</tr>
-<tr>
-<td>git merge <em>user</em></td>
-<td><strong>合并</strong>分支: 切换到master 写git merge <em>order</em> ，有冲突会报 ，去对应文件修改，保存后add 、commit <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg">尚硅谷新版Git快速入门(3h迅速掌握git)_哔哩哔哩_bilibili</a></td>
-</tr>
-</tbody></table>
+<p>| git                           | 解释                                                                                                                                                         |<br>
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |<br>
+| git log                       | 查看**日志 ** git log –oneline 打印每行描述                                                                                                                          |<br>
+| git commit -m <em>第二次提交</em>         | 写说明的简单操作 <strong>跳过vim</strong> ，提交后系统打印一串commit id                                                                                                                     |<br>
+| git reset –hard <em>粘贴commit id</em> | <strong>回退</strong>版本 <em>hard硬重置（覆盖所有变更、soft 、mixed</em>                                                                                                                      |<br>
+| git branch <em>分支名</em>              | git commit的时候创建一个分支(git init之后不提交是分支不了的)                                                                                                                   |<br>
+| git branch -a                 | <strong>查看</strong>所有分支                                                                                                                                                 |<br>
+| git checkout <em>分支名</em>            | <strong>切换</strong>分支                                                                                                                                                   |<br>
+| git checkout -b <em>user分支名</em>     | <strong>创建并切换</strong>到此user分支                                                                                                                                          |<br>
+| git branch -d <em>user分支名</em>       | <strong>删除</strong>分支                                                                                                                                                   |<br>
+| git merge <em>user</em>              | <strong>合并</strong>分支: 切换到master 写git merge <em>order</em> ，有冲突会报 ，去对应文件修改，保存后add 、commit <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg">尚硅谷新版Git快速入门(3h迅速掌握git)_哔哩哔哩_bilibili</a> |</p>
 <ul>
 <li>更多命令行介绍</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>git</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git clone <em>需要下载下来的仓库链接</em> <em>remote-git-resp</em></td>
-<td>将远程仓库的内容完全<strong>下载</strong>到本地的remote-git-resp文件夹</td>
-</tr>
-<tr>
-<td>git config user.name <em>你的名字英文</em></td>
-<td>配置当前仓库的用户名</td>
-</tr>
-<tr>
-<td>git config user.email <em>你的邮箱</em></td>
-<td>配置当前仓库的邮箱</td>
-</tr>
-<tr>
-<td>git status</td>
-<td><strong>查看</strong>暂存区状态</td>
-</tr>
-<tr>
-<td>git rm –cached <em>a.txt</em></td>
-<td><strong>删除</strong>暂存区的文件</td>
-</tr>
-<tr>
-<td>git restore <em>a.txt</em></td>
-<td>误删除后未提交,恢复误删除文件(之前commit过的)</td>
-</tr>
-<tr>
-<td>git revert <em>误删文件后上一个版本号</em></td>
-<td><strong>还原</strong>：硬重置后,会回到最开始的提交,这样提交过程就消失了;所以此方法恢复当前版本，就要粘贴下一版本号内容,不丢失之前提交信息</td>
-</tr>
-<tr>
-<td>git tag <em>标签名称</em> <em>版本号</em></td>
-<td>给当前提交版本加上标记&#x3D;&#x3D;起别名：git tag <em>uptfile</em> <em>版本号</em> 之后 再写git tag，之后git log <em>uptfile标签名称</em> 就可以查看历史信息(取代git log _版本号_的不方便查找) <strong>可以给每个版本都添加标签但是标签不能重复</strong></td>
-</tr>
-<tr>
-<td>git tag -d <em>标签名称</em></td>
-<td>删除标签</td>
-</tr>
-<tr>
-<td>git checkout -b <em>标签名称</em></td>
-<td>对当前标签所在的提交进行分支创建</td>
-</tr>
-</tbody></table>
+<p>| git                                       | 解释                                                                                                                                      |<br>
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |<br>
+| git clone <em>需要下载下来的仓库链接</em> <em>remote-git-resp</em> | 将远程仓库的内容完全<strong>下载</strong>到本地的remote-git-resp文件夹                                                                                                  |<br>
+| git config user.name <em>你的名字英文</em>             | 配置当前仓库的用户名                                                                                                                              |<br>
+| git config user.email <em>你的邮箱</em>              | 配置当前仓库的邮箱                                                                                                                               |<br>
+| git status                                | <strong>查看</strong>暂存区状态                                                                                                                             |<br>
+| git rm –cached <em>a.txt</em>                    | <strong>删除</strong>暂存区的文件                                                                                                                            |<br>
+| git restore <em>a.txt</em>                       | 误删除后未提交,恢复误删除文件(之前commit过的)                                                                                                             |<br>
+| git revert <em>误删文件后上一个版本号</em>                  | <strong>还原</strong>：硬重置后,会回到最开始的提交,这样提交过程就消失了;所以此方法恢复当前版本，就要粘贴下一版本号内容,不丢失之前提交信息                                                                      |<br>
+| git tag <em>标签名称</em> <em>版本号</em>                      | 给当前提交版本加上标记==起别名：git tag <em>uptfile</em> <em>版本号</em> 之后 再写git tag，之后git log <em>uptfile标签名称</em> 就可以查看历史信息(取代git log _版本号_的不方便查找) <strong>可以给每个版本都添加标签但是标签不能重复</strong> |<br>
+| git tag -d <em>标签名称</em>                         | 删除标签                                                                                                                                    |<br>
+| git checkout -b <em>标签名称</em>                    | 对当前标签所在的提交进行分支创建                                                                                                                        |</p>
 <p>从远程仓库克隆下来的仓库，”origin”来代替远程仓库-地址</p>
-<table>
-<thead>
-<tr>
-<th>git remote add origin <em>github仓库地址</em></th>
-<th>增加远程仓库地址，别名为origin</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git remote remove origin</td>
-<td>删除远程仓库地址</td>
-</tr>
-<tr>
-<td>git remote rename origin</td>
-<td>改名</td>
-</tr>
-</tbody></table>
+<p>| git remote add origin <em>github仓库地址</em> | 增加远程仓库地址，别名为origin |<br>
+| ---------------------------------- | ------------------ |<br>
+| git remote remove origin           | 删除远程仓库地址           |<br>
+| git remote rename origin           | 改名                 |</p>
 <p>本地仓库想要推送给的远程仓库从github更换成gitee之后设置ssh：</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg/?p=29&spm_id_from=pageDriver&vd_source=bb2ffa36d06143b515b5c6c4aa6e8c3a">29 - Git - 命令 - 远程仓库_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wm4y1z7Dg/?p=29&amp;spm_id_from=pageDriver&amp;vd_source=bb2ffa36d06143b515b5c6c4aa6e8c3a">29 - Git - 命令 - 远程仓库_哔哩哔哩_bilibili</a></p>
 <ul>
 <li>把项目上传到github 教程</li>
 </ul>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M master</span><br><span class="line">git remote add origin 填你的github的仓库链接比如https://github.com/wantosleep3/JavaWebbrand-case.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 
-
-
-
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" data-id="cuidytalbJYQSeSdA3V3IHu-F" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/10/05/Uploading-Your-Project-Files-to-GitHub-A-Guide-to-Using-Git/" data-id="cuidZYNioX1iKudpu12BIhit6" class="article-share-link">
         Share
       </a>
       
@@ -319,7 +189,7 @@
     <footer class="footer">
   <div class="outer">
     <ul class="list-inline">
-      <li>Eris&#39;s Blog &copy; 2025</li>
+      <li>Eris&#39;s Blog &copy; 2026</li>
       
         <li>
           

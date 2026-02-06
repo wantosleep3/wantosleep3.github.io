@@ -70,35 +70,33 @@
       
         <p>在使用Typora想同时查看图片和上传到github pages的时候不需要额外操作，不想用图床的话，这里提供保姆级教学</p>
 <span id="more"></span>
-
 <img src="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/beagle.jpg" class="" title="狗">
-
-
 <p>参考这位的教程:【解决Hexo博客图片无法显示】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D7411U7Yk">解决Hexo博客图片无法显示_哔哩哔哩_bilibili</a></p>
-<h2 id="step1-修改博客根目录中的-config-yml"><a href="#step1-修改博客根目录中的-config-yml" class="headerlink" title="step1 修改博客根目录中的 _config.yml"></a>step1 修改博客根目录中的 _config.yml</h2><hr>
+<h2 id="step1-修改博客根目录中的-config-yml">step1 修改博客根目录中的 _config.yml</h2>
+<hr>
 <p>新增一条<code>post_asset_folder: true</code></p>
 <p>这样会使你写一条新博客的时候hexo自动新建一个博文同名文件夹</p>
-<h2 id="step2-卸载已有的插件-hexo-asset-image"><a href="#step2-卸载已有的插件-hexo-asset-image" class="headerlink" title="step2 卸载已有的插件 hexo-asset-image"></a>step2 卸载已有的插件 hexo-asset-image</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="step3-重新安装hexo-asset-image-插件"><a href="#step3-重新安装hexo-asset-image-插件" class="headerlink" title="step3 重新安装hexo-asset-image 插件"></a>step3 重新安装hexo-asset-image 插件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="step4-新建博客"><a href="#step4-新建博客" class="headerlink" title="step4 新建博客"></a>step4 新建博客</h2><p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
+<h2 id="step2-卸载已有的插件-hexo-asset-image">step2 卸载已有的插件 hexo-asset-image</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uninstall hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<h2 id="step3-重新安装hexo-asset-image-插件">step3 重新安装hexo-asset-image 插件</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:<span class="comment">//github.com/xcodebuild/hexo-asset-image.git --save</span></span><br></pre></td></tr></table></figure>
+<h2 id="step4-新建博客">step4 新建博客</h2>
+<p>必须使用官网的Hexo命令才可以自动生成一个博客同名文件夹</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="step5-把图片复制文件夹中"><a href="#step5-把图片复制文件夹中" class="headerlink" title="step5 把图片复制文件夹中"></a>step5 把图片复制文件夹中</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
-
+<h2 id="step5-把图片复制文件夹中">step5 把图片复制文件夹中</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片名自定义](./此处对应你的博客同名文件夹/你的图片名.jpg)</span><br></pre></td></tr></table></figure>
 <p>一定要注意<strong>斜杠的方向</strong>，如果直接是windows路径复制到typora是不能正确生成图片的</p>
 <p>你还可以使用typora自带的缩放，生成也是正常的</p>
 <p>图片缩放25%后的参数模板：</p>
 <p><code>&lt;img src=&quot;./insert-pic-in-blog/beagle.jpg&quot; alt=&quot;beagle&quot; style=&quot;zoom:25%;&quot; /&gt;</code></p>
-<p><img src="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/beagle.jpg" class="" title="“图片描述” style&#x3D;”zoom:25%"></p>
+<p><img src="/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/beagle.jpg" class="" title="&quot;图片描述&quot; style&#x3D;&quot;zoom:25%"></p>
 <p>6、部署到git</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo c <span class="comment">//清理缓存</span></span><br><span class="line">hexo g <span class="comment">//生成</span></span><br><span class="line">hexo s <span class="comment">//部署到本地4000端口检查</span></span><br><span class="line">hexo g <span class="comment">//pr到git 更新博客</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" data-id="cuidy2GFtmjYql1ivEPs268HF" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2023/11/10/%E5%A6%82%E4%BD%95%E5%9C%A8blog%E4%B8%AD%E6%AD%A3%E7%A1%AE%E5%86%85%E5%B5%8C%E5%9B%BE%E7%89%87%EF%BC%88%E4%B8%8D%E7%94%A8%E5%9B%BE%E5%BA%8A%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%89/" data-id="cuidRRNzjXZIg2o9s21uEfDU2" class="article-share-link">
         Share
       </a>
       
@@ -139,7 +137,7 @@
     <footer class="footer">
   <div class="outer">
     <ul class="list-inline">
-      <li>Eris&#39;s Blog &copy; 2025</li>
+      <li>Eris&#39;s Blog &copy; 2026</li>
       
         <li>
           
