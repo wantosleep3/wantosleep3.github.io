@@ -8,7 +8,6 @@
   
   
   <title>
-    Rds(on)不是越小越好 -- MOSFET |
     
     Eris&#39;s Blog
   </title>
@@ -37,22 +36,11 @@
 
   <div class="article-inner">
     
-    <header class="article-header">
-      
-  
-  <h1 class="article-title" itemprop="name">
-    Rds(on)不是越小越好 -- MOSFET
-  </h1>
-  
-  
-
-    </header>
-    
 
     
     <div class="article-meta">
       <a href="/2026/02/04/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/" class="article-date">
-  <time datetime="2026-02-04T08:52:12.000Z" itemprop="datePublished">2026-02-04</time>
+  <time datetime="2026-02-04T08:52:12.420Z" itemprop="datePublished">2026-02-04</time>
 </a>
       
     </div>
@@ -68,14 +56,14 @@
       
       
       
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<p>最近在捣鼓个板子，为了选个MOSFET差点把自己绕进去。以前我总觉得这东西简单，选型时盯着Rds(on)看，谁小选谁。毕竟电阻小发热就少，这逻辑听着没毛病</p>
+        <p>最近在捣鼓个板子，为了选个MOSFET差点把自己绕进去。以前我总觉得这东西简单，选型时盯着Rds(on)看，谁小选谁。毕竟电阻小发热就少，这逻辑听着没毛病</p>
 <p>结果这次我翻了车。事实证明，电阻不是越小越好，这里面有个大坑</p>
+<span id="more"></span>
 <h2 id="低电阻的代价">低电阻的代价</h2>
 <p>厂家为了把导通电阻做小，必须把芯片里面的晶圆面积做大。你可以把它想象成要把水管弄粗，就得费更多材料。这带来的副作用是栅极电荷（
-    <span id="mjx-9dbfc7a8">
+    <span id="mjx-42de6528">
       <style>
-      #mjx-9dbfc7a8{
+      #mjx-42de6528{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -239,15 +227,15 @@ g[data-mml-node="xypic"] path {
 <h2 id="MCU-IO-直驱的陷阱"><strong>MCU IO 直驱的陷阱</strong></h2>
 <p>很多时候我们喜欢用单片机的 IO 口直接去控制 MOSFET。这时候如果你选了个电阻极低、电流极大的管子，你的 MCU 可能会“推不动”</p>
 <p>因为栅极电荷太大，MCU 那点微弱的电流想把电容充满，得花很长时间。</p>
-<p>这就导致了一个严重后果：开关损耗爆炸。管子在半开半关的状态下停留太久，虽然导通后电阻小，但在开关的那一瞬间，它发热巨大。甚至波形都会变形，原本方方正正的 PWM 波，变成了圆滚滚的</p>
-<h2 id="来看看这颗国民神管-2N7002K"><strong>来看看这颗国民神管 2N7002K</strong></h2>
-<p>https://item.szlcsc.com/8397143.html?fromZone=l_c__%2522catalog%2522&amp;spm=sc.cidn.xh2.zy.n&amp;lcsc_vid=QwQKUVZfFQJeVwcEEQUIUVxRQgddX11VTlBdVV1WFQUxVlNRR1BXUlVQRFBeVTsOAxUeFF5JWA0HFBBIBBsCBBcFWQIBCksFFhUPCwsBWFJWVkoOAwwC</p>
-<p>虽然老，但很有代表性。你问图一里怎么没写电阻？其实电阻藏在“斜率”里。</p>
-<p><strong>[ Fig.1 Output Characteristics 图片]</strong></p>
+<p>这就导致了一个严重后果：开关损耗爆炸。管子在半开半关的状态下停留太久，虽然导通后电阻小，但在开关的那一瞬间，它发热巨大。甚至波形都会变形，原本方方正正的 PWM 波，变成了圆的</p>
+<h2 id="来看看这颗国民神管-2N7002"><strong>来看看这颗国民神管 2N7002</strong></h2>
+<p>https://static.szlcsc.com/ecp/assets/hjc/new-pdf/cn/2N7002.pdf</p>
+<p>虽然老，但很有代表性。你问图一里怎么没写电阻？其实电阻藏在斜率</p>
+<img src="/2026/02/04/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/fig1.png" class="" title="图片描述">
 <p>横轴是电压，纵轴是电流
-    <span id="mjx-2997e248">
+    <span id="mjx-4fa236a8">
       <style>
-      #mjx-2997e248{
+      #mjx-4fa236a8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -408,9 +396,9 @@ g[data-mml-node="xypic"] path {
   。</p>
 <p>在这张图里，你要看左下角那几根刚冒头的</p>
 <p>先看最底下那根 
-    <span id="mjx-c740ec78">
+    <span id="mjx-1802111">
       <style>
-      #mjx-c740ec78{
+      #mjx-1802111{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -569,9 +557,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.375ex;" xmlns="http://www.w3.org/2000/svg" width="9.684ex" height="1.92ex" role="img" focusable="false" viewBox="0 -683 4280.4 848.6" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="TeXAtom" transform="translate(616,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g><g data-mml-node="mi" transform="translate(786,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1955.6,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3011.4,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><g data-mml-node="mi" transform="translate(3511.4,0)"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow data-mjx-texclass="ORD"><mi>G</mi><mi>S</mi></mrow></msub><mo>=</mo><mn>3</mn><mi>V</mi></math></mjx-assistive-mml></mjx-container>
     </span>
    的线。当横轴电压（
-    <span id="mjx-c233a89">
+    <span id="mjx-25ae65a8">
       <style>
-      #mjx-c233a89{
+      #mjx-25ae65a8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -730,9 +718,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.375ex;" xmlns="http://www.w3.org/2000/svg" width="3.863ex" height="1.92ex" role="img" focusable="false" viewBox="0 -683 1707.6 848.6" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="TeXAtom" transform="translate(616,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g><g data-mml-node="mi" transform="translate(828,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow data-mjx-texclass="ORD"><mi>D</mi><mi>S</mi></mrow></msub></math></mjx-assistive-mml></mjx-container>
     </span>
   ）是 1V 的时候，纵轴电流（
-    <span id="mjx-0392409">
+    <span id="mjx-c213275">
       <style>
-      #mjx-0392409{
+      #mjx-c213275{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -891,11 +879,11 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="2.508ex" height="1.885ex" role="img" focusable="false" viewBox="0 -683 1108.5 833" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="mi" transform="translate(473,-150) scale(0.707)"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>I</mi><mi>D</mi></msub></math></mjx-assistive-mml></mjx-container>
     </span>
   ）才勉强爬到 0.1A 多一点。我们算一下，1V 除以 0.1A，电阻大概是 10 欧姆。</p>
-<p>这就叫“推不开”。你给了 3V 的驱动电压，电阻依然大得吓人。</p>
+<p>这就叫“推不开”。你给了 3V 的驱动电压，电阻依然大</p>
 <p>再看最上面那簇 
-    <span id="mjx-63c4a5c">
+    <span id="mjx-7b6d077">
       <style>
-      #mjx-63c4a5c{
+      #mjx-7b6d077{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1054,13 +1042,13 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.375ex;" xmlns="http://www.w3.org/2000/svg" width="10.815ex" height="1.92ex" role="img" focusable="false" viewBox="0 -683 4780.4 848.6" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="TeXAtom" transform="translate(616,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g><g data-mml-node="mi" transform="translate(786,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1955.6,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3011.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(500,0)"></path></g><g data-mml-node="mi" transform="translate(4011.4,0)"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow data-mjx-texclass="ORD"><mi>G</mi><mi>S</mi></mrow></msub><mo>=</mo><mn>10</mn><mi>V</mi></math></mjx-assistive-mml></mjx-container>
     </span>
    的线。同样是 1V 电压，电流直接飙到了 0.8A 甚至更高。1V 除以 0.8A，电阻就只有 1 欧姆多了。</p>
-<p><strong>结论很简单：线越陡，电阻越小。线趴着不动，说明电阻大。</strong> 这张图不是直接告诉你电阻是多少，而是告诉你这管子得加电压才能把电阻降下来</p>
-<p><strong>[Fig.7 Capacitance Characteristics 图片]</strong></p>
+<p>结论很简单：线越陡，电阻越小。线趴着不动，说明电阻大。 这张图不是直接告诉你电阻是多少，而是告诉你这管子得加电压才能把电阻降下来</p>
+<img src="/2026/02/04/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/fig2.png" class="" title="图片描述">
 <p>再看这张电容图。你可能会忽略它，但它是救命的</p>
 <p>看那条标着 
-    <span id="mjx-e947ff38">
+    <span id="mjx-25c01778">
       <style>
-      #mjx-e947ff38{
+      #mjx-25c01778{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1220,9 +1208,9 @@ g[data-mml-node="xypic"] path {
     </span>
    的线，这是输入电容。虽然它随着电压变化在往下掉，但最高也就 40pF 左右。</p>
 <p>这里得讲个硬道理：我们常说的栅极电荷 
-    <span id="mjx-7fd8a038">
+    <span id="mjx-068e39a">
       <style>
-      #mjx-7fd8a038{
+      #mjx-068e39a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1381,9 +1369,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="2.74ex" height="2.26ex" role="img" focusable="false" viewBox="0 -704 1211.3 999" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mi" transform="translate(824,-150) scale(0.707)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>Q</mi><mi>g</mi></msub></math></mjx-assistive-mml></mjx-container>
     </span>
   ，本质上就是给这个 
-    <span id="mjx-5e404938">
+    <span id="mjx-d138ff5">
       <style>
-      #mjx-5e404938{
+      #mjx-d138ff5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1542,9 +1530,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.357ex;" xmlns="http://www.w3.org/2000/svg" width="3.858ex" height="1.952ex" role="img" focusable="false" viewBox="0 -705 1705.2 862.8" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="TeXAtom" transform="translate(748,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(345,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(814,0)"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>C</mi><mrow data-mjx-texclass="ORD"><mi>i</mi><mi>s</mi><mi>s</mi></mrow></msub></math></mjx-assistive-mml></mjx-container>
     </span>
    充电攒出来的。根据 
-    <span id="mjx-836c3ce">
+    <span id="mjx-f6508008">
       <style>
-      #mjx-836c3ce{
+      #mjx-f6508008{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1703,9 +1691,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.439ex;" xmlns="http://www.w3.org/2000/svg" width="11.032ex" height="2.034ex" role="img" focusable="false" viewBox="0 -705 4876 899" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mo" transform="translate(1068.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(2124.6,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mo" transform="translate(3106.8,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(4107,0)"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><mo>=</mo><mi>C</mi><mo>×</mo><mi>V</mi></math></mjx-assistive-mml></mjx-container>
     </span>
   ，电容 
-    <span id="mjx-c37abb8">
+    <span id="mjx-f2a6e298">
       <style>
-      #mjx-c37abb8{
+      #mjx-f2a6e298{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1864,9 +1852,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.719ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 760 727" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi></math></mjx-assistive-mml></mjx-container>
     </span>
    越小，把电压 
-    <span id="mjx-6cf19c78">
+    <span id="mjx-c8f912a">
       <style>
-      #mjx-6cf19c78{
+      #mjx-c8f912a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2025,9 +2013,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.05ex;" xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>V</mi></math></mjx-assistive-mml></mjx-container>
     </span>
    顶上去需要的电荷量 
-    <span id="mjx-aae02e08">
+    <span id="mjx-647de9e8">
       <style>
-      #mjx-aae02e08{
+      #mjx-647de9e8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2190,9 +2178,9 @@ g[data-mml-node="xypic"] path {
 <h2 id="怎么避坑"><strong>怎么避坑</strong></h2>
 <p>选型别光盯着电阻看。</p>
 <p>如果你是做高频开关，或者用 MCU 直驱，一定要去翻翻规格书后面的 
-    <span id="mjx-cccbe55">
+    <span id="mjx-e7e072a">
       <style>
-      #mjx-cccbe55{
+      #mjx-e7e072a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2351,9 +2339,9 @@ g[data-mml-node="xypic"] path {
       <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="2.74ex" height="2.26ex" role="img" focusable="false" viewBox="0 -704 1211.3 999" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mi" transform="translate(824,-150) scale(0.707)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>Q</mi><mi>g</mi></msub></math></mjx-assistive-mml></mjx-container>
     </span>
    或者 
-    <span id="mjx-2a1626b8">
+    <span id="mjx-297e778">
       <style>
-      #mjx-2a1626b8{
+      #mjx-297e778{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2513,13 +2501,13 @@ g[data-mml-node="xypic"] path {
     </span>
    参数</p>
 <p>如果你选了个 2 毫欧的管子，一看电容好几千 pF，那最好配个专门的驱动芯片，别指望 MCU 能直接干活</p>
-<p>对于信号切换或者小电流控制，像 2N7002K 这种“大电阻、小电容”的管子，反而是更合适的选择。它动作快，不拖泥带水，信号不失真</p>
+<p>对于信号切换或者小电流控制，像2N7002这种“大电阻、小电容”的管子，反而是更合适的选择。它动作快，不拖泥带水，信号不失真</p>
 <p>选元器件就是做平衡，参数太完美的通常都有你看不到的代价</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wantosleep3.github.io/2026/02/04/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/" data-id="cuid0mrggKCJ5HLdQM0y0-a_f" class="article-share-link">
+      <a data-url="https://wantosleep3.github.io/2026/02/04/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/" data-id="cuidi32ecZajW_zhPLdyOPy3Q" class="article-share-link">
         Share
       </a>
       
