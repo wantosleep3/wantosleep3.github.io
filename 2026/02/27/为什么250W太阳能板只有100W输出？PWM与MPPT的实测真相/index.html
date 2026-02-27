@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    为什么250W太阳能板只有100W输出？PWM与MPPT的实测真相 |
+    
+    Eris&#39;s Blog
+  </title>
+  <!-- Icon -->
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-为什么250W太阳能板只有100W输出？PWM与MPPT的实测真相" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+  
+  <h1 class="article-title" itemprop="name">
+    为什么250W太阳能板只有100W输出？PWM与MPPT的实测真相
+  </h1>
+  
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2026/02/27/%E4%B8%BA%E4%BB%80%E4%B9%88250W%E5%A4%AA%E9%98%B3%E8%83%BD%E6%9D%BF%E5%8F%AA%E6%9C%89100W%E8%BE%93%E5%87%BA%EF%BC%9FPWM%E4%B8%8EMPPT%E7%9A%84%E5%AE%9E%E6%B5%8B%E7%9C%9F%E7%9B%B8/" class="article-date">
+  <time datetime="2026-02-27T06:32:26.000Z" itemprop="datePublished">2026-02-27</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <p>明明买的是250W的大板子，怎么正午大太阳底下，充电功率只有100W？这剩下的150W去哪了？是被控制器吃了吗？</p>
+<span id="more"></span>
+<p><strong>串联叠电压，并联叠电流</strong></p>
+<img src="/2026/02/27/%E4%B8%BA%E4%BB%80%E4%B9%88250W%E5%A4%AA%E9%98%B3%E8%83%BD%E6%9D%BF%E5%8F%AA%E6%9C%89100W%E8%BE%93%E5%87%BA%EF%BC%9FPWM%E4%B8%8EMPPT%E7%9A%84%E5%AE%9E%E6%B5%8B%E7%9C%9F%E7%9B%B8/img02.png" class="">
+<p><strong>串联（Series）</strong></p>
+<ul>
+<li><strong>电压（U）相加</strong>：比如两块12V的板子串联，系统电压就变成了24V。</li>
+<li><strong>电流（I）不变</strong>：水管还是那么粗，流速不会变。</li>
+</ul>
+<p><strong>并联（Parallel）</strong></p>
+<ul>
+<li><strong>电压（U）不变</strong>：两块12V板子并联，电压还是12V。</li>
+<li><strong>电流（I）相加</strong>：两根水管一起供水，总流量翻倍。</li>
+</ul>
+<p>有个大坑要注意。千万别把24V的板子和12V的板子直接并联。根据电路原理，24V的高压电会倒灌进12V的板子。这不仅充不进电，还可能把板子烧了。</p>
+<p>来聊聊太阳能控制器的底层逻辑</p>
+<img src="/2026/02/27/%E4%B8%BA%E4%BB%80%E4%B9%88250W%E5%A4%AA%E9%98%B3%E8%83%BD%E6%9D%BF%E5%8F%AA%E6%9C%89100W%E8%BE%93%E5%87%BA%EF%BC%9FPWM%E4%B8%8EMPPT%E7%9A%84%E5%AE%9E%E6%B5%8B%E7%9C%9F%E7%9B%B8/img001.png" class="">
+<p>看这张图，左边的情况很多人都遇到过：买了一块标称250W的太阳能板，参数写着工作电压（Vmp）32V，工作电流（Imp）7.8A。接上一个普通的PWM控制器给12V电池充电，结果一看电表，只有8A左右。</p>
+<p>简单算笔账：12V电池 × 8A电流 = 96W。</p>
+<p>标称250W的板子，只跑出了不到100W。剩下的150W去哪了？是被控制器偷了吗？</p>
+<p><strong>1. PWM的工作原理：直接钳位</strong></p>
+<p>看左边的电路图。PWM控制器本质上是一个快速开关。导通的时候，它直接把太阳能板和电池并在了一起。</p>
+<p>电池是一个巨大的电压钳位器。当32V的太阳能板接到12V电池上，板子的电压会被瞬间强行拉低到电池电压（12V）。</p>
+<p>太阳能板的特性是“受光照限制的电流源”。你看下方的I-V曲线（蓝线），在12V和32V的位置，电流其实差别不大，都是8A左右。</p>
+<p>但是功率等于电压乘电流（P=UI）。<br>
+<strong>PWM模式下：</strong> 12V × 8A ≈ 96W。</p>
+<p>你看左图红色功率曲线上的那个点，因为电压被压得太低，工作点直接掉。板子本来能产出的高电压势能，全部被浪费掉了。</p>
+<p><strong>2. MPPT的工作原理：DC-DC变换</strong></p>
+<p>再看右图。MPPT（最大功率点追踪）控制器内部多了一个DC-DC Buck降压电路。</p>
+<p>它把太阳能板和电池隔离开来。MPPT允许太阳能板保持在它最舒服的工作电压——也就是Vmp 32V。</p>
+<p><strong>在板子这一侧：</strong> 32V × 7.8A ≈ 250W。此时工作点处于右图红色曲线的峰值</p>
+<p>然后MPPT通过内部电感储能和开关变换，把这250W的能量转换成适合12V电池的电压和电流。根据能量守恒（忽略损耗）：</p>
+<p><strong>在电池这一侧：</strong> 250W ÷ 12V ≈ 20.8A。</p>
+<p>注意看电流的变化，从PWM的8A变成了MPPT的20.8A。这多出来的电流，就是用32V到12V之间的电压差“换”回来的。</p>
+<p><strong>3. 串并联的选择逻辑</strong></p>
+<p>理解了这个原理，串并联的问题也就迎刃而解了。</p>
+<p>如果你有两块板子，选择串联会使电压叠加</p>
+<ul>
+<li>如果你用PWM：电压会被直接拉回12V，损失惨重</li>
+<li>如果你用MPPT：它能轻松处理64V的高压输入，将其转换为巨大的低压充电电流。</li>
+</ul>
+<p>如果你的太阳能板电压（Vmp）远高于电池电压（比如图中的32V充12V），必须使用MPPT。这不仅仅是效率高一点的问题，而是能不能用到板子标称功率的问题</p>
+<p>PWM适合板子电压和电池电压非常接近的小型系统（比如18V板子充12V电池）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wantosleep3.github.io/2026/02/27/%E4%B8%BA%E4%BB%80%E4%B9%88250W%E5%A4%AA%E9%98%B3%E8%83%BD%E6%9D%BF%E5%8F%AA%E6%9C%89100W%E8%BE%93%E5%87%BA%EF%BC%9FPWM%E4%B8%8EMPPT%E7%9A%84%E5%AE%9E%E6%B5%8B%E7%9C%9F%E7%9B%B8/" data-id="cuidDJ4nRi_Ua-IRE9PWzKLhB" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2026/02/08/Rds-on-%E4%B8%8D%E6%98%AF%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD-MOSFET/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">Rds(on)不是越小越好  -- MOSFET</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>Eris&#39;s Blog &copy; 2026</li>
+      
+        <li>
+          
+            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
+            
+        </li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+    <p><ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul></p>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Eris&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
